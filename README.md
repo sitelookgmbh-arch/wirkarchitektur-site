@@ -46,19 +46,36 @@ Offen bleibt:
 
 ## Deploy (Cloudflare Pages)
 
-1. Repo bei GitHub anlegen, diesen Ordner pushen.
-2. Cloudflare → Workers & Pages → *Create* → *Pages* → Git-Repo verbinden.
-3. Build command: **leer**. Output directory: **`/`**. Framework: **None**.
-4. Custom domain `wirkarchitektur.de` hinzufügen (Nameserver der Zone müssen bei
-   Cloudflare liegen).
-5. `_headers` und `_redirects` greifen automatisch — nichts zu konfigurieren.
+1. Cloudflare → **Workers & Pages** → *Create* → *Pages* → *Connect to Git* →
+   Repo `sitelookgmbh-arch/wirkarchitektur-site`.
+2. Build settings: **Framework preset: None** · **Build command: leer** ·
+   **Build output directory: `/`**. Kein Build — die Dateien werden nur verteilt.
+3. Nach dem ersten Deploy: *Custom domains* → `wirkarchitektur.de` hinzufügen.
+   Voraussetzung: Die Zone liegt bei Cloudflare (Nameserver bei Strato umstellen).
+4. `_headers` greift automatisch. `_redirects` enthält bewusst nichts.
 
-Prüfen nach dem Deploy:
+### Domainweiterleitungen — NICHT über `_redirects`
+
+Cloudflare Pages unterstützt in `_redirects` **keine** domainübergreifenden
+Weiterleitungen. Für `wirkarchitektur.com`, `digitale-wirkarchitektur.de` und `www.`:
+
+- Zone in Cloudflare anlegen (Nameserver umstellen).
+- Proxied DNS-Eintrag setzen, damit Anfragen überhaupt bei Cloudflare landen —
+  z. B. `AAAA @ 100::` (Discard-Adresse), orange Wolke an. Ohne proxied Record
+  greift keine Regel.
+- **Rules → Redirect Rules → Single Redirect**:
+  *When* `hostname eq "wirkarchitektur.com"` → *Then* dynamic redirect,
+  `concat("https://wirkarchitektur.de", http.request.uri.path)`, Status **301**,
+  Query-String erhalten.
+- Für `digitale-wirkarchitektur.de` und die `www.`-Varianten dasselbe.
+
+### Prüfen nach dem Deploy
 
 ```bash
 curl -sI https://wirkarchitektur.de/ | grep -i content-security-policy
-curl -s -o /dev/null -w '%{http_code}\n' https://wirkarchitektur.de/gibtsnicht   # 404
-curl -s -o /dev/null -w '%{redirect_url}\n' https://digitale-wirkarchitektur.de/
+curl -s -o /dev/null -w '%{http_code}\n' https://wirkarchitektur.de/gibtsnicht     # 404
+curl -sI https://wirkarchitektur.com/ | grep -iE '^(HTTP|location)'                # 301
+curl -sI https://digitale-wirkarchitektur.de/ | grep -iE '^(HTTP|location)'        # 301
 ```
 
 ## Lizenz

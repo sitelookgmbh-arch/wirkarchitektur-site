@@ -1,6 +1,9 @@
-# Die Seite lebt auf wirkarchitektur.de. Alles andere zeigt dorthin.
-https://digitale-wirkarchitektur.de/*   https://wirkarchitektur.de/:splat   301
-https://www.digitale-wirkarchitektur.de/*  https://wirkarchitektur.de/:splat  301
-https://wirkarchitektur.com/*           https://wirkarchitektur.de/:splat   301
-https://www.wirkarchitektur.com/*       https://wirkarchitektur.de/:splat   301
-https://www.wirkarchitektur.de/*        https://wirkarchitektur.de/:splat   301
+# Nur pfadbezogene Weiterleitungen. Cloudflare Pages unterstuetzt in dieser
+# Datei KEINE domainuebergreifenden Weiterleitungen (Doku: "Domain-level
+# redirects: nicht unterstuetzt").
+#
+# Die Weiterleitung von wirkarchitektur.com und digitale-wirkarchitektur.de
+# auf wirkarchitektur.de laeuft deshalb ueber eine Single-Redirect-Regel je
+# Zone im Cloudflare-Dashboard — siehe README.
+
+# (derzeit keine Pfadweiterleitungen noetig)
