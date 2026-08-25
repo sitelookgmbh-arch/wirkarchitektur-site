@@ -33,17 +33,16 @@ in der Datenschutzerklärung zur Lüge — und die CSP blockt es ohnehin.
 
 ## Vor dem Livegang zu füllen
 
-| Platzhalter | Datei | Was |
-|---|---|---|
-| `PLATZHALTER@wirkarchitektur.de` | `index.html` | Kontaktadresse |
-| `{{FIRMA}}` `{{STRASSE}}` `{{PLZ_ORT}}` | Impressum, Datenschutz | Entität, die auch Domain und Marke hält |
-| `{{VERTRETUNG}}` `{{REGISTERGERICHT}}` `{{HRB}}` `{{USTID}}` | Impressum | Registerdaten |
-| `{{TELEFON}}` `{{EMAIL}}` `{{VERANTWORTLICH}}` | Impressum | Kontakt |
-| `{{HOSTER}}` | Datenschutz | tatsächlich gewählter Anbieter |
-| `{{STAND}}` | Datenschutz | Datum |
+Impressums- und Firmendaten sind aus `sitelook.de/impressum/` übernommen (Stand 25.08.2026):
+Firma, Anschrift, HRB 9239 / AG Neuss, USt-ID, Geschäftsführung, Telefon, `info@sitelook.gmbh`.
 
-⚠️ Domains laufen derzeit über einen Strato-Vertrag auf anderen Namen als die GmbH. Das
-gehört geklärt, **bevor** ein Impressum eine Firma nennt, die nicht Vertragspartner ist.
+Offen bleibt:
+
+| Punkt | Datei | Was |
+|---|---|---|
+| Kontaktadresse | `index.html`, Impressum | derzeit `info@sitelook.gmbh`. Eine Adresse `…@wirkarchitektur.de` braucht MX-Einträge |
+| Hoster-Entität | `datenschutz.html` | beim Anlegen des Cloudflare-Kontos genaue Vertragsentität und AVV-Link gegenprüfen |
+| Strato-Vertrag | — | prüfen, ob die Domains auf der GmbH oder privat laufen (Bestellbestätigung lautete auf die Geschäftsführerin) |
 
 ## Deploy (Cloudflare Pages)
 
