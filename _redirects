@@ -1,0 +1,6 @@
+# Die Seite lebt auf wirkarchitektur.de. Alles andere zeigt dorthin.
+https://digitale-wirkarchitektur.de/*   https://wirkarchitektur.de/:splat   301
+https://www.digitale-wirkarchitektur.de/*  https://wirkarchitektur.de/:splat  301
+https://wirkarchitektur.com/*           https://wirkarchitektur.de/:splat   301
+https://www.wirkarchitektur.com/*       https://wirkarchitektur.de/:splat   301
+https://www.wirkarchitektur.de/*        https://wirkarchitektur.de/:splat   301

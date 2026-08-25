@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="de">
+<!--
+  Sie lesen den Quelltext. Dann wissen Sie schon, worauf Sie achten.
+
+  Kein JavaScript. Keine externe Schriftart. Kein fremder Host. Kein Cookie.
+  Die CSP in /_headers erzwingt es: default-src 'none'.
+  Netzwerk-Tab auf, neu laden, zählen. Das ist die ganze Behauptung.
+
+  Wirkarchitektur ist die Werkstatt-Marke der sitelook GmbH.
+  Was hier entsteht, ist Apache-2.0 und liegt auf GitHub.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wirkarchitektur — Werkstatt der sitelook GmbH</title>
+<meta name="description" content="Werkzeuge und Methode für die Arbeit mit KI-Assistenten in echten Repos. Guards, die die Wirkung prüfen statt den Wortlaut. Apache-2.0, öffentlich, nachbaubar.">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <nav>
+    <a href="#werkbank">Werkbank</a>
+    <a href="#guard">Guard</a>
+    <a href="#offen">Warum offen</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</header>
+
+<main>
+
+<section class="hero">
+  <h1>Leitplanken für Repos,<br>in denen eine KI mitschreibt.</h1>
+  <p class="lead">
+    Ein Assistent mit Schreibrecht auf deinem Arbeitsbaum ist kein Autocomplete. Er ist ein
+    Prozess mit Werkzeugzugriff, ohne Gedächtnis über die Sitzung hinaus und ohne Gefühl
+    für Scope. Das ist beherrschbar — aber nicht mit besseren Prompts, sondern mit
+    Struktur, die auch dann hält, wenn der Kontext weg ist.
+  </p>
+  <p class="lead">
+    Hier liegt, was dabei entstanden ist. Fertig, benutzbar, Apache-2.0.
+  </p>
+</section>
+
+<section id="werkbank">
+  <h2>Werkbank</h2>
+
+  <table class="werkbank">
+    <tbody>
+      <tr>
+        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">zfdw-ki-leitplanken</a></td>
+        <td class="wb-was">
+          Sechs Methodentexte, drei Vorlagen, vier Slash-Commands, zwei Hooks mit Testsuite,
+          ein Herkunfts-Gate. Keine Laufzeit, keine Dependencies, kein Installer.
+        </td>
+        <td class="wb-lic">Apache-2.0</td>
+      </tr>
+      <tr>
+        <td class="wb-name">guard-geschuetzte-daten.sh</td>
+        <td class="wb-was">
+          PreToolUse-Hook. Prüft, was ein <code>git add</code> <em>bewirken würde</em> —
+          nicht, wie er heißt. 14 Testfälle, 6 bewusste Nicht-Treffer.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+      <tr>
+        <td class="wb-name">Sprint + Write-Scope</td>
+        <td class="wb-was">
+          Eine Datei pro Arbeitsabschnitt, die zugleich der Zustand ist. Kein zweiter
+          State-Store, der gegen das Repo driftet. Überlebt <code>/clear</code>.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+      <tr>
+        <td class="wb-name">herkunft-check.sh</td>
+        <td class="wb-was">
+          Grep-Gate gegen eine gepflegte Begriffsliste, bevor etwas aus Kundenarbeit
+          öffentlich wird. Die Begriffsdatei ist gitignored <em>und</em> guard-geschützt —
+          sie besteht aus genau den Namen, die nicht raus sollen.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="guard">
+  <h2>Der Fall, an dem Textregeln scheitern</h2>
+
+  <p>
+    Jede <code>CLAUDE.md</code> enthält irgendwo den Satz „niemals <code>secrets.json</code>
+    committen“. Der funktioniert — solange der Dateiname im Befehl vorkommt. Er tut es hier nicht:
+  </p>
+
+  <figure>
+    <pre><code>$ git add -A</code></pre>
+    <figcaption>Nichts zu matchen. Die Regel hat kein Substrat.</figcaption>
+  </figure>
+
+  <p>Der Guard sieht deshalb nicht in den Befehl, sondern in den Arbeitsbaum:</p>
+
+  <figure>
+    <pre><code># Nur git-add-artige Befehle interessieren.
+printf '%s' "$befehl" | grep -qE '(^|[;&|]|\s)git\s+(-[^ ]+\s+)*add(\s|$)' || exit 0
+
+# Kandidaten = alles, was ein Add ueberhaupt erfassen koennte.
+kandidaten=$(git status --porcelain --untracked-files=all | sed 's/^...//')</code></pre>
+    <figcaption>Auszug. Exit 2 blockt den Werkzeugaufruf, stderr geht ans Modell.</figcaption>
+  </figure>
+
+  <figure>
+    <pre><code>$ hooks/tests/test-guard.sh
+Nicht-Treffer (duerfen NICHT blocken):
+  ok    git add einer harmlosen Datei                  (Code 0)
+  ok    Bulk-Add ohne geschuetzte Datei                (Code 0)
+Treffer (muessen blocken):
+  ok    .env vorhanden, Bulk-Add -A                    (Code 2)
+  ok    Add in Befehlskette                            (Code 2)
+...
+14 bestanden, 0 fehlgeschlagen</code></pre>
+    <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
+  </figure>
+
+  <p>
+    Dieselbe Unterscheidung trägt weiter, als sie zunächst aussieht: Regeln, die abgewogen
+    werden dürfen, gehören in Text. Regeln, bei denen ein Verstoß eine Meldepflicht auslöst,
+    gehören in Code, der nicht abwägt. Die meisten Projekte legen beides an denselben Ort
+    und wundern sich über das Ergebnis.
+  </p>
+</section>
+
+<section id="offen">
+  <h2>Warum das offen liegt</h2>
+
+  <p>
+    Weil Werkzeuge, die man nicht lesen kann, keine Werkzeuge sind, sondern Versprechen.
+    Und weil das, was hier steht, ohnehin nur durch Nachbauen besser wird.
+  </p>
+
+  <p>
+    Die Herkunft steht drin, wo es eine gibt: Der Sprint-Gedanke ist angeregt durch
+    <a href="https://github.com/cubetribe/ClaudeCode_GodMode-On">CC_GodMode</a> von Dennis
+    Westermann — dort eingebettet in ein großes Agenten-System, hier auf das eingedampft, was
+    ohne Toolchain trägt. Was <em>nicht</em> übernommen wurde, ist genauso benannt wie das,
+    was übernommen wurde. Das ist keine Höflichkeit, das ist Nachprüfbarkeit.
+  </p>
+
+  <p>
+    Alte Tugend, unverändert gültig: <strong>nimm, verbessere, gib zurück.</strong> Und dann
+    rede darüber — nicht aus Eitelkeit, sondern weil ungeteiltes Wissen niemandem nützt und
+    stillschweigend verrottet.
+  </p>
+
+  <p class="callout">
+    Alles unter Apache-2.0. Patentklausel drin, Namensnennung drin, kommerzielle Nutzung
+    ausdrücklich erlaubt — auch für die, die damit Geld verdienen wollen.<br>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">github.com/sitelookgmbh-arch/zfdw-ki-leitplanken</a>
+  </p>
+</section>
+
+<section id="wer">
+  <h2>Wer</h2>
+  <p>
+    <strong>Martin Eggert</strong>, sitelook GmbH, Neuss. Baut Fachanwendungen und die
+    Infrastruktur darunter — Blazor/.NET, nginx, Asset-Pull-Deploys, DNS, das übliche.
+    Angefangen mit APL.68000 auf dem Atari ST, was erklärt, warum hier Ausdrucksdichte
+    höher gewichtet wird als Zeilenzahl.
+  </p>
+  <p>
+    <em>Wirkarchitektur</em> ist die Werkstatt-Marke der <strong>sitelook GmbH</strong> — der
+    Ort, an dem das landet, was aus Projekten allgemein genug herausfällt, um für andere
+    zu taugen.
+  </p>
+</section>
+
+<section id="kontakt">
+  <h2>Kontakt</h2>
+  <p>
+    Issues und Pull Requests gehen ins Repo — das ist der schnellere Weg. Für alles andere:
+  </p>
+  <p class="kontaktzeile">
+    <a href="mailto:PLATZHALTER@wirkarchitektur.de">PLATZHALTER@wirkarchitektur.de</a>
+  </p>
+</section>
+
+<section id="kolophon">
+  <h2>Kolophon</h2>
+  <p>
+    Handgeschriebenes HTML, ein Stylesheet, kein Build. Systemschriften, weil eine
+    Webfont-Einbindung eine Anfrage an einen fremden Host wäre. Ausgeliefert als statische
+    Dateien vom Edge.
+  </p>
+  <figure>
+    <pre><code>Content-Security-Policy: default-src 'none'; style-src 'self';
+  img-src 'self' data:; form-action 'none'; base-uri 'none';
+  frame-ancestors 'none'
+Referrer-Policy: no-referrer
+Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
+    <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
+  </figure>
+  <p class="messwerte">
+    Diese Seite: <strong>8,7 kB</strong> HTML, <strong>6,5 kB</strong> CSS,
+    <strong>2 Anfragen</strong> insgesamt. Kein Skript, kein Cookie, kein Banner.
+  </p>
+</section>
+
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/impressum.html">Impressum</a>
+    <a href="/datenschutz.html">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist ein Kennzeichen der sitelook GmbH. Inhalte, soweit nicht anders bezeichnet, Apache-2.0.</p>
+</footer>
+
+</body>
+</html>
