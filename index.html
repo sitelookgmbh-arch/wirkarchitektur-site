@@ -25,6 +25,7 @@
   <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
   <nav>
     <a href="#werkbank">Werkbank</a>
+    <a href="#einordnung">Einordnung</a>
     <a href="#guard">Guard</a>
     <a href="#offen">Warum offen</a>
     <a href="#kontakt">Kontakt</a>
@@ -54,7 +55,7 @@
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">zfdw-ki-leitplanken</a></td>
         <td class="wb-was">
-          Sechs Methodentexte, drei Vorlagen, vier Slash-Commands, zwei Hooks mit Testsuite,
+          Sieben Methodentexte, drei Vorlagen, vier Slash-Commands, zwei Hooks mit Testsuite,
           ein Herkunfts-Gate. Keine Laufzeit, keine Dependencies, kein Installer.
         </td>
         <td class="wb-lic">Apache-2.0</td>
@@ -62,8 +63,10 @@
       <tr>
         <td class="wb-name">guard-geschuetzte-daten.sh</td>
         <td class="wb-was">
-          PreToolUse-Hook. Prüft, was ein <code>git add</code> <em>bewirken würde</em> —
-          nicht, wie er heißt. 14 Testfälle, 6 bewusste Nicht-Treffer.
+          PreToolUse-Hook. Misst mit <code>git add --dry-run</code>, was ein Befehl
+          <em>tatsächlich stagen würde</em> — statt aus dem Zustand daneben zu schließen.
+          Deckt <code>git commit -am</code> mit ab, fällt ohne <code>jq</code> closed.
+          19 Testfälle, 8 bewusste Nicht-Treffer.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
@@ -72,6 +75,15 @@
         <td class="wb-was">
           Eine Datei pro Arbeitsabschnitt, die zugleich der Zustand ist. Kein zweiter
           State-Store, der gegen das Repo driftet. Überlebt <code>/clear</code>.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md">Methode 07 — Verortung</a></td>
+        <td class="wb-was">
+          Einordnung gegen SpecKit, BMAD, OpenSpec, GSD Core und Kiro — samt der Frage,
+          wann eines der fünf die bessere Wahl ist. Angaben aus den Original-Repositorien,
+          mit Lesedatum im Kopf.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
@@ -88,6 +100,45 @@
   </table>
 </section>
 
+<section id="einordnung">
+  <h2>Einordnung</h2>
+
+  <p>
+    Spec-driven Development kennt drei Reifegrade. <strong>Spec-first</strong> — einmal vor der
+    Arbeit spezifiziert, danach liegt das Dokument still. <strong>Spec-anchored</strong> — die
+    Spezifikation wird mitgeführt und beim Abschluss fortgeschrieben. <strong>Spec-as-Source</strong>
+    — Menschen editieren nur noch die Spezifikation, nie den Code.
+  </p>
+
+  <p>
+    Das hier ist <strong>Spec-anchored</strong>, und zwar als Entscheidung, nicht als
+    Zwischenstufe. Spec-first scheitert daran, dass das Dokument nach dem dritten Tag nicht mehr
+    stimmt und es niemand merkt — der Fehlermodus hat einen Namen, <em>Spec Drift</em>.
+    Spec-as-Source setzt voraus, dass generierter Code nie von Hand angefasst wird; in gewachsenen
+    Kundenprojekten trägt diese Annahme nicht. Die Sprint-Datei ist deshalb der Stand selbst, nicht
+    dessen Ankündigung.
+  </p>
+
+  <p>
+    Gegenüber <a href="https://github.com/github/spec-kit">SpecKit</a>,
+    <a href="https://github.com/bmad-code-org/BMAD-METHOD">BMAD</a>,
+    <a href="https://github.com/Fission-AI/OpenSpec">OpenSpec</a>,
+    <a href="https://github.com/open-gsd/gsd-core">GSD Core</a> und
+    <a href="https://kiro.dev/">Kiro</a> ist das kein Konkurrenzangebot. Die fünf regeln die
+    <em>Reihenfolge</em> — beschreiben, planen, zerlegen, umsetzen. Sie sagen nicht, welche Datei
+    ein Abschnitt anfassen darf, welche Grenze in Code gehört und womit „fertig“ belegt ist. Genau
+    das steht hier, und es läuft neben jedem der fünf.
+  </p>
+
+  <p class="callout">
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md">Methode 07 — Verortung</a>
+    zieht den Vergleich im Einzelnen, mit Lesedatum im Kopf, weil diese Seite schneller driftet als
+    der Rest. Zwei verbreitete Angaben stimmen dort nicht mehr: Das ursprüngliche GSD-Repository ist
+    <strong>archiviert</strong> und lebt als GSD Core weiter, und SpecKit ist mit dem
+    <code>converge</code>-Schritt <strong>nicht mehr linear</strong>.
+  </p>
+</section>
+
 <section id="guard">
   <h2>Der Fall, an dem Textregeln scheitern</h2>
 
@@ -101,15 +152,28 @@
     <figcaption>Nichts zu matchen. Die Regel hat kein Substrat.</figcaption>
   </figure>
 
-  <p>Der Guard sieht deshalb nicht in den Befehl, sondern in den Arbeitsbaum:</p>
+  <p>
+    Der Guard sieht deshalb nicht in den Befehl, sondern fragt das Werkzeug, was der Befehl
+    <em>bewirken würde</em>:
+  </p>
 
   <figure>
-    <pre><code># Nur git-add-artige Befehle interessieren.
-printf '%s' "$befehl" | grep -qE '(^|[;&|]|\s)git\s+(-[^ ]+\s+)*add(\s|$)' || exit 0
+    <pre><code># Nur Befehle, die ueberhaupt etwas stagen koennen: git add in jeder Form —
+# und git commit -a, das Verfolgtes selbst stagt.
+printf '%s' "$befehl" | grep -qE '(^|[;&amp;|]|\s)git\s+(-[^ ]+\s+)*add(\s|$)' \
+  || printf '%s' "$befehl" | grep -qE '(^|[;&amp;|]|\s)git\s+commit([^;&amp;|]*)?\s-[A-Za-z]*a' \
+  || exit 0
 
-# Kandidaten = alles, was ein Add ueberhaupt erfassen koennte.
-kandidaten=$(git status --porcelain --untracked-files=all | sed 's/^...//')</code></pre>
-    <figcaption>Auszug. Exit 2 blockt den Werkzeugaufruf, stderr geht ans Modell.</figcaption>
+# Kandidaten = was der Befehl TATSAECHLICH stagen wuerde. Gemessen, nicht
+# geschaetzt: `git status` weiss nicht, ob eine Datei vom Befehl erfasst waere.
+if printf '%s' "$befehl" | grep -qE '…add\s+(-u|--update)(\s|$)' \
+   || printf '%s' "$befehl" | grep -qE '…commit…\s-[A-Za-z]*a'; then
+  roh=$(git add -u --dry-run 2>/dev/null)   # -u / commit -a: nur Verfolgtes
+else
+  roh=$(git add -A --dry-run 2>/dev/null)   # sonst: auch Unverfolgtes
+fi
+kandidaten=$(printf '%s\n' "$roh" | sed -n "s/^add '\(.*\)'$/\1/p")</code></pre>
+    <figcaption>Auszug, Regexe gekürzt. Exit 2 blockt den Werkzeugaufruf, stderr geht ans Modell.</figcaption>
   </figure>
 
   <figure>
@@ -120,10 +184,34 @@ Nicht-Treffer (duerfen NICHT blocken):
 Treffer (muessen blocken):
   ok    .env vorhanden, Bulk-Add -A                    (Code 2)
   ok    Add in Befehlskette                            (Code 2)
+Gemessen statt geschaetzt:
+  ok    commit -am stagt verfolgte Datei               (Code 2)
+  ok    add -u ignoriert unverfolgte .env              (Code 0)
+  ok    add -A erfasst dieselbe .env                   (Code 2)
+Fail-closed ohne jq:
+  ok    ohne jq blockt der Guard                       (Code 2)
 ...
-14 bestanden, 0 fehlgeschlagen</code></pre>
+19 bestanden, 0 fehlgeschlagen</code></pre>
     <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
   </figure>
+
+  <p>
+    Drei Härtungen sind im August aus produktiver Kundenarbeit zurückgeflossen — dort waren über
+    hundert unverfolgte Dateien mit realen Daten im Arbeitsverzeichnis gelandet, keine davon von
+    <code>.gitignore</code> erfasst. <strong>Messen statt schätzen:</strong> <code>--dry-run</code>
+    beseitigt einen Fehlalarm, der vorher garantiert kam — <code>git add -u</code> neben einer
+    herumliegenden, unverfolgten <code>.env</code>. <strong><code>git commit -am</code> mit
+    abgedeckt:</strong> Es stagt selbst und lief vorher vorbei. <strong>Fail-closed ohne
+    <code>jq</code>:</strong> Fehlt das Werkzeug, blockt der Guard und nennt den
+    Installationsbefehl, statt still durchzulassen. Ein Guard, der auf einem frisch aufgesetzten
+    Rechner unbemerkt abgeschaltet ist, ist schlimmer als keiner.
+  </p>
+
+  <p>
+    Übernommen ist dabei die Technik, nicht der Fall: Dieser Guard kennt keine Kundendateien und
+    keine Kundenpfade — die stehen in der <code>.claude/geschuetzte-pfade</code> des jeweiligen
+    Projekts. Vor der Veröffentlichung läuft das Herkunfts-Gate darüber.
+  </p>
 
   <p>
     Dieselbe Unterscheidung trägt weiter, als sie zunächst aussieht: Regeln, die abgewogen
@@ -221,8 +309,9 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>8,7 kB</strong> HTML, <strong>6,5 kB</strong> CSS,
-    <strong>2 Anfragen</strong> insgesamt. Kein Skript, kein Cookie, kein Banner.
+    Diese Seite: <strong>14,9 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
+    über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
+    insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>
 </section>
 
