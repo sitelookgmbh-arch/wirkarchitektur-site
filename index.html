@@ -30,6 +30,7 @@
   <a class="wordmark" href="/">Wirk<span>architektur</span></a>
   <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
   <nav>
+    <a href="#einstieg">Einstieg</a>
     <a href="#werkbank">Werkbank</a>
     <a href="/methode/">Methode</a>
     <a href="#einordnung">Einordnung</a>
@@ -52,6 +53,39 @@
   <p class="lead">
     Hier liegt, was dabei entstanden ist. Fertig, benutzbar, Apache-2.0.
   </p>
+</section>
+
+<section id="einstieg">
+  <h2>In 10 Minuten</h2>
+  <div>
+    <p>
+      Für Teams und Einzelne, die mit Claude Code in einem echten Repo arbeiten. Der erste
+      Schritt ist der Guard — der einzige Teil, dessen Fehlen echten Schaden anrichten kann. Er
+      blockt, wenn ein Befehl eine geschützte Datei in die Versionsverwaltung bringen würde, auch
+      dann, wenn ihr Name im Befehl gar nicht vorkommt.
+    </p>
+    <figure>
+<pre><code>L=/tmp/leitplanken
+git clone https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken $L
+cd dein-repo &amp;&amp; mkdir -p .claude/hooks
+cp $L/hooks/guard-geschuetzte-daten.sh .claude/hooks/
+cp $L/hooks/stop-git-status.sh .claude/hooks/
+chmod +x .claude/hooks/*.sh
+cp $L/hooks/settings.json.vorlage .claude/settings.json
+cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
+      <figcaption>Gibt es schon eine <code>.claude/settings.json</code>, den <code>hooks</code>-Block
+      hineinkopieren statt die Datei zu überschreiben. Danach die Schutzmuster in
+      <code>.claude/geschuetzte-pfade</code> auf das eigene Projekt setzen — die Vorgaben decken
+      Secrets ab, nicht deine Kundendaten.</figcaption>
+    </figure>
+    <p>
+      Weiterlesen in dieser Reihenfolge:
+      <a href="/methode/04-deterministische-guards">04 — Deterministische Guards</a> (warum der Guard so
+      gebaut ist), dann <a href="/methode/01-sprintplan-und-write-scope">01 — Sprintplan mit
+      Write-Scope</a> (der nächste Schritt). Alles Weitere steht in der
+      <a href="/methode/">Übersicht</a>.
+    </p>
+  </div>
 </section>
 
 <section id="werkbank">
@@ -298,12 +332,46 @@ Fail-closed ohne jq:
   </p>
 </section>
 
+<section id="leistungen">
+  <h2>Mit sitelook</h2>
+  <div>
+    <p>
+      Alles hier ist frei nutzbar und ohne Hilfe einsetzbar. Wer es schneller oder an einem
+      gewachsenen Projekt einführen will, kann das mit der sitelook GmbH tun:
+    </p>
+    <div class="leistungen">
+      <div>
+        <h3>Einführung im eigenen Repo</h3>
+        <p>Guard, Anweisungsdatei und erster Sprint an einem bestehenden Projekt aufgesetzt —
+        mit Schutzmustern für die eigenen Daten statt der Vorgaben.</p>
+      </div>
+      <div>
+        <h3>Review des Agenten-Setups</h3>
+        <p>Bestehende Hooks, Berechtigungen und Anweisungsdateien geprüft: Was wirkt, was nur
+        dasteht, was fehlt — mit Rot-Beweis statt Augenschein.</p>
+      </div>
+      <div>
+        <h3>Schulung</h3>
+        <p>Die Methode für ein Team, an dessen eigenem Code. Kein Folienvortrag, sondern
+        Arbeit am Repo.</p>
+      </div>
+    </div>
+    <p class="kontaktzeile"><a href="mailto:info@sitelook.gmbh">info@sitelook.gmbh</a></p>
+  </div>
+</section>
+
 <section id="wer">
   <h2>Wer</h2>
   <p>
     Hinter Wirkarchitektur steht die <strong>sitelook GmbH</strong> in Neuss. Über sie läuft die
     Arbeit: Entwicklung, Beratung, Schulung — und die Rechnung. Gemacht wird sie von
     <strong>Martin Eggert</strong>.
+  </p>
+  <p>
+    Zu den Namen: <strong>Wirkarchitektur</strong> ist die Marke, <strong>zfdw-ki-leitplanken</strong>
+    das Repo mit Methode und Werkzeugen, <strong>ZfdW</strong> — Zentrum für digitale
+    Wirkarchitektur — der Herausgebervermerk darin, und die <strong>sitelook GmbH</strong> der
+    Träger, über den alles läuft.
   </p>
   <p>
     Geschrieben wird hier aus der Praxis: Fachanwendungen und die Infrastruktur darunter —
@@ -317,10 +385,6 @@ Fail-closed ohne jq:
     Und ein Satz, älter als jedes Werkzeug hier: <em>Einer ist keiner.</em> Die Fehler liegen
     selten in den Teilen, fast immer in den Übergängen zwischen ihnen. Wer das einmal in einer
     laufenden Produktion gesehen hat, kennt das Muster, lange bevor es Write-Scope heißt.
-  </p>
-  <p>
-    Es geht nicht um Verpackung. Die Ästhetik im vermeintlich Reizlosen ist ergiebiger als
-    aufgeblähter Schein — was man dieser Seite ansieht.
   </p>
 </section>
 
@@ -350,7 +414,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>17,5 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
+    Diese Seite: <strong>20,4 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
     über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
     insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>

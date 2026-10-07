@@ -5,8 +5,8 @@ Dependencies. Deploy = Dateien hochladen.
 
 ```
 index.html        Startseite
-impressum.html    § 5 DDG  — Platzhalter, s. u.
-datenschutz.html  DSGVO    — Platzhalter, s. u.
+impressum.html    § 5 DDG
+datenschutz.html  DSGVO
 404.html          ehrlicher 404 statt Weiterleitung
 styles.css        das einzige Stylesheet
 _headers          CSP + Security-Header (Cloudflare Pages)
