@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 — Verortung: SpecKit · BMAD · OpenSpec · GSD · Kiro — Wirkarchitektur</title>
+<meta name="description" content="Diese Sammlung ist kein Spec-driven-Development-Framework und will keines ersetzen. Sie regelt, was die Frameworks offenlassen: wer welche Datei …">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/07-verortung">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/07-verortung">
+<meta property="og:title" content="07 — Verortung: SpecKit · BMAD · OpenSpec · GSD · Kiro — Wirkarchitektur">
+<meta property="og:description" content="Diese Sammlung ist kein Spec-driven-Development-Framework und will keines ersetzen. Sie regelt, was die Frameworks offenlassen: wer welche Datei …">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">Methode 07 von 10 · Stand 2026-08-26</p>
+  <h1>07 — Verortung: SpecKit · BMAD · OpenSpec · GSD · Kiro</h1>
+  <p class="lead">Diese Sammlung ist kein Spec-driven-Development-Framework und will keines ersetzen. Sie regelt, was die Frameworks offenlassen: <strong>wer welche Datei schreiben darf</strong>, <strong>welche Grenze in Code gehört</strong> und <strong>womit „fertig" belegt ist</strong>. Sie läuft neben jedem der fünf.</p>
+</section>
+
+<section>
+  <h2>Die Frage</h2>
+  <div>
+    <p>Wie verhält sich das zu den SDD-Frameworks?</p>
+    <p class="callout">Write-Scope, Guard und Nachweis sind an keinen Ablauf gebunden.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Warum diese Seite existiert</h2>
+  <p>Wer Spec-driven Development (SDD) kennt, ordnet ein, was er sieht — und ohne Einordnung landet diese Sammlung im selben Fach wie fünf Werkzeuge, die etwas anderes tun. Diese Seite sagt, wo die Grenze verläuft: was die Frameworks liefern, was hier stattdessen steht, und wann man besser zu einem von ihnen greift.</p>
+</section>
+
+<section>
+  <h2>Im Volltext</h2>
+  <div>
+    <p>Diese Seite ist der Einstieg. Begründungen, Beispiele und Grenzen stehen im Volltext —
+    eine Regel steht an genau einer Stelle, und das ist das Repo.</p>
+    <ul>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#warum-diese-seite-existiert">Warum diese Seite existiert</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#das-gemeinsame-grundmuster">Das gemeinsame Grundmuster</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#was-hier-anders-geschnitten-ist">Was hier anders geschnitten ist</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#was-die-fünf-besser-können">Was die fünf besser können</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#wann-du-besser-eines-der-fünf-nimmst">Wann du besser eines der fünf nimmst</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#kombinieren-statt-entscheiden">Kombinieren statt entscheiden</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md#verwandt">Verwandt</a></li>
+    </ul>
+    <p class="callout"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md">Volltext lesen: methode/07_Verortung.md</a><br>
+    Stand 2026-08-26 · Apache-2.0 · Fehler oder Gegenbeispiel bitte als Issue im Repo.</p>
+    <p class="klein"><a href="/methode/06-herkunft-und-weitergabe">← vorherige Methode</a> · <a href="/methode/">Übersicht</a> · <a href="/methode/08-spezifikationsguete">nächste Methode →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>

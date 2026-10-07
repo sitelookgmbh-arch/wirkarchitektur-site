@@ -3,4 +3,17 @@
   <url><loc>https://wirkarchitektur.de/</loc><lastmod>2026-10-07</lastmod></url>
   <url><loc>https://wirkarchitektur.de/impressum</loc></url>
   <url><loc>https://wirkarchitektur.de/datenschutz</loc></url>
+  <!-- methode:start (erzeugt von werkzeuge/methodenseiten.py) -->
+  <url><loc>https://wirkarchitektur.de/methode/</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/01-sprintplan-und-write-scope</loc><lastmod>2026-08-26</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/02-schichten-anweisung-hook-skill</loc><lastmod>2026-08-25</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/03-kontext-budget</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/04-deterministische-guards</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/05-verifikation-statt-behauptung</loc><lastmod>2026-10-07</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/06-herkunft-und-weitergabe</loc><lastmod>2026-08-25</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/07-verortung</loc><lastmod>2026-08-26</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/08-spezifikationsguete</loc><lastmod>2026-09-09</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/09-systembeschreibung</loc><lastmod>2026-09-10</lastmod></url>
+  <url><loc>https://wirkarchitektur.de/methode/10-fremdtext-ist-daten</loc><lastmod>2026-10-07</lastmod></url>
+  <!-- methode:end -->
 </urlset>

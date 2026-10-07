@@ -12,6 +12,8 @@ styles.css        das einzige Stylesheet
 _headers          CSP + Security-Header (Cloudflare Pages)
 _redirects        .com und Langform -> wirkarchitektur.de
 robots.txt · sitemap.xml
+methode/          Methodenseiten — ERZEUGT, nicht von Hand ändern (s. u.)
+werkzeuge/        methodenseiten.py: erzeugt methode/ + Sitemap-Block, prüft Drift
 ```
 
 ## Die Zusage der Seite
@@ -82,3 +84,22 @@ curl -sI https://digitale-wirkarchitektur.de/ | grep -iE '^(HTTP|location)'     
 
 Inhalte © sitelook GmbH. Der Code der Methode, auf die die Seite verweist, liegt unter
 Apache-2.0 in `sitelookgmbh-arch/zfdw-ki-leitplanken`.
+
+## Methodenseiten (`/methode/`)
+
+Die Seiten unter `methode/` sind **Einstiege, keine Kopien**: Frage, wichtigster Satz,
+Kurzfassung, erster Absatz des Problems, Prüfliste und die Abschnittsliste mit Links in den
+Volltext. Der Volltext bleibt im Repo `zfdw-ki-leitplanken` — eine Regel steht an genau einer
+Stelle.
+
+Erzeugt werden sie von `werkzeuge/methodenseiten.py` aus einem lokalen Checkout des
+Methoden-Repos (Standard: `../zfdw-ki-leitplanken`). Kein Build beim Ausliefern: Das Skript
+schreibt statisches HTML, das wie jede andere Datei committet wird.
+
+```bash
+werkzeuge/methodenseiten.py             # nach Änderungen im Methoden-Repo: neu erzeugen, Diff lesen
+werkzeuge/methodenseiten.py --pruefen   # Exit 1, wenn eine Seite nicht mehr zum Repo passt
+```
+
+`--pruefen` ist der Rot-Beweis gegen Drift: Er vergleicht jede Seite und den Sitemap-Block mit
+dem, was das Repo heute ergäbe — auch verwaiste Seiten zu gelöschten Methoden.
