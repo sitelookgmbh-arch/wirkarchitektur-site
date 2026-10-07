@@ -23,7 +23,7 @@ Host, kein Cookie. Geprüft: die einzigen Subressourcen sind `/styles.css` und e
 **Wer hier etwas ergänzt, prüft danach:**
 
 ```bash
-grep -nE '<(link|script|img|iframe|source)' *.html   # nur /styles.css + data: erlaubt
+grep -nE '<(link|script|img|iframe|source)' *.html   # nur /styles.css, data: und rel=canonical erlaubt
 grep -n 'style="' *.html                             # muss leer bleiben
 grep -nE '@import|url\(' styles.css                  # muss leer bleiben
 ```
