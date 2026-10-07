@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 — Verifikation statt Behauptung — Wirkarchitektur</title>
+<meta name="description" content="„Fertig&quot; ist keine Statusmeldung, sondern eine Behauptung. Zu jedem Arbeitsschritt gehört die Zeile, mit der man ihn nachprüft — und die Prüfung muss das …">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/05-verifikation-statt-behauptung">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/05-verifikation-statt-behauptung">
+<meta property="og:title" content="05 — Verifikation statt Behauptung — Wirkarchitektur">
+<meta property="og:description" content="„Fertig&quot; ist keine Statusmeldung, sondern eine Behauptung. Zu jedem Arbeitsschritt gehört die Zeile, mit der man ihn nachprüft — und die Prüfung muss das …">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">Methode 05 von 10 · Stand 2026-10-07</p>
+  <h1>05 — Verifikation statt Behauptung</h1>
+  <p class="lead">„Fertig" ist keine Statusmeldung, sondern eine Behauptung. Zu jedem Arbeitsschritt gehört die Zeile, mit der man ihn nachprüft — und die Prüfung muss das messen, was tatsächlich zählt.</p>
+</section>
+
+<section>
+  <h2>Die Frage</h2>
+  <div>
+    <p>Wann ist „fertig" belegt?</p>
+    <p class="callout">Wer gebaut hat, prüft mit denselben Annahmen.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Das Problem</h2>
+  <p>Ein Assistent, der etwas gebaut hat, ist der schlechteste Prüfer dafür. Nicht aus Unehrlichkeit: Er prüft mit denselben Annahmen, mit denen er gebaut hat. Was er übersehen hat, übersieht er wieder.</p>
+</section>
+
+<section>
+  <h2>Prüfliste</h2>
+  <ul>
+    <li>Hat jeder abgeschlossene Schritt eine benannte Prüfzeile — nicht nur ein „läuft"?</li>
+    <li>Kann die Prüfung überhaupt fehlschlagen, oder meldet sie bei fehlender Voraussetzung Grün?</li>
+    <li>Gibt es einen Rot-Beweis — ein ausgeführtes Gegenbeispiel, das die Prüfung rot macht?</li>
+    <li>Wird ein Fix rot, wenn man ihn probehalber wieder entfernt?</li>
+    <li>Was passiert, wenn ein Nebenpfad scheitert — meldet der Vorgang dann trotzdem Erfolg?</li>
+    <li>Nennt jede Nein-Aussage ihre geprüfte Fläche und ihren blinden Fleck?</li>
+    <li>Misst sie das, was zählt — oder nur das, was leicht zu messen ist?</li>
+    <li>Wurde eine Oberflächenänderung im Release-Zustand angesehen, nicht nur im Debug-Modus?</li>
+    <li>Hat jeder Befund eine Fundstelle?</li>
+    <li>Welche Beschreibung wird durch diesen Diff falsch — und wurde sie im selben Commit angefasst?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Im Volltext</h2>
+  <div>
+    <p>Diese Seite ist der Einstieg. Begründungen, Beispiele und Grenzen stehen im Volltext —
+    eine Regel steht an genau einer Stelle, und das ist das Repo.</p>
+    <ul>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#das-problem">Das Problem</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#die-regel">Die Regel</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#rot-beweis--kann-die-prüfung-überhaupt-fehlschlagen">Rot-Beweis — kann die Prüfung überhaupt fehlschlagen?</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#stiller-erfolg--die-befundklasse-die-niemand-meldet">Stiller Erfolg — die Befundklasse, die niemand meldet</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#geprüfte-fläche-und-blinder-fleck">Geprüfte Fläche und blinder Fleck</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#die-realität-mitdenken">Die Realität mitdenken</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md#spec-drift--was-verifikation-nicht-fängt">Spec Drift — was Verifikation nicht fängt</a></li>
+    </ul>
+    <p class="callout"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/05_Verifikation-statt-Behauptung.md">Volltext lesen: methode/05_Verifikation-statt-Behauptung.md</a><br>
+    Stand 2026-10-07 · Apache-2.0 · Fehler oder Gegenbeispiel bitte als Issue im Repo.</p>
+    <p class="klein"><a href="/methode/04-deterministische-guards">← vorherige Methode</a> · <a href="/methode/">Übersicht</a> · <a href="/methode/06-herkunft-und-weitergabe">nächste Methode →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>

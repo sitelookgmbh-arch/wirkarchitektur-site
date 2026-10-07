@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 — Systembeschreibung — Wirkarchitektur</title>
+<meta name="description" content="Die Anweisungsdatei ist zu klein für ein Datenmodell, der Code zu groß zum Lesen. Dazwischen fehlt eine Ebene — und sie besteht aus vier Dateien, die …">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/09-systembeschreibung">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/09-systembeschreibung">
+<meta property="og:title" content="09 — Systembeschreibung — Wirkarchitektur">
+<meta property="og:description" content="Die Anweisungsdatei ist zu klein für ein Datenmodell, der Code zu groß zum Lesen. Dazwischen fehlt eine Ebene — und sie besteht aus vier Dateien, die …">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">Methode 09 von 10 · Stand 2026-09-10</p>
+  <h1>09 — Systembeschreibung</h1>
+  <p class="lead">Die Anweisungsdatei ist zu klein für ein Datenmodell, der Code zu groß zum Lesen. Dazwischen fehlt eine Ebene — und sie besteht aus vier Dateien, die vier verschiedene Fragen beantworten. Wer sie zu einer zusammenzieht, bekommt keine davon beantwortet.</p>
+</section>
+
+<section>
+  <h2>Die Frage</h2>
+  <div>
+    <p>Woher weiß der Assistent, was die Anwendung überhaupt ist?</p>
+    <p class="callout">Der Nutzen dieser Ebene entsteht nicht beim Schreiben, sondern beim Gegenlesen.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Das Problem</h2>
+  <p>Ein Assistent mit Schreibrecht kennt zwei Zustände: die Anweisungsdatei, die immer mitläuft, und das, was er gerade geöffnet hat. Dazwischen liegt alles, was eine gewachsene Anwendung ausmacht — wie die Dinge heißen, wer sie schreiben darf, welche Quelle bei Widerspruch gilt.</p>
+</section>
+
+<section>
+  <h2>Prüfliste</h2>
+  <ul>
+    <li>Kann der Assistent nach dem Lesen <strong>einer</strong> Datei sagen, wozu das System da ist — ohne den</li>
+    <li>Steht für jedes Feld, wer es schreiben darf und woher sein Wert kommt?</li>
+    <li>Gibt es für jedes Feld, dessen Wert „von außen" kommt, eine Gegenstelle, die diese Lieferung</li>
+    <li>Trägt jede der Dateien im Kopf, gegen was und wann sie zuletzt geprüft wurde?</li>
+    <li>Ist die Schichtung der Wahrheit als Tabelle da — oder steht sie nur in der Erinnerung</li>
+    <li>Enthält die Systembeschreibung Feldnamen? Dann gehören sie ins Schema.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Im Volltext</h2>
+  <div>
+    <p>Diese Seite ist der Einstieg. Begründungen, Beispiele und Grenzen stehen im Volltext —
+    eine Regel steht an genau einer Stelle, und das ist das Repo.</p>
+    <ul>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#das-problem">Das Problem</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#vier-fragen-vier-dateien">Vier Fragen, vier Dateien</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#die-schichtung-der-wahrheit">Die Schichtung der Wahrheit</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#der-fehler-den-drei-dateien-erst-sichtbar-machen">Der Fehler, den drei Dateien erst sichtbar machen</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#wer-wen-überstimmt">Wer wen überstimmt</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md#die-grenze">Die Grenze</a></li>
+    </ul>
+    <p class="callout"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md">Volltext lesen: methode/09_Systembeschreibung.md</a><br>
+    Stand 2026-09-10 · Apache-2.0 · Fehler oder Gegenbeispiel bitte als Issue im Repo.</p>
+    <p class="klein"><a href="/methode/08-spezifikationsguete">← vorherige Methode</a> · <a href="/methode/">Übersicht</a> · <a href="/methode/10-fremdtext-ist-daten">nächste Methode →</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>

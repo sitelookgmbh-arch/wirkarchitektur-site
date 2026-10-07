@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methode — Wirkarchitektur</title>
+<meta name="description" content="10 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/">
+<meta property="og:title" content="Methode — Wirkarchitektur">
+<meta property="og:description" content="10 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
+<meta property="og:locale" content="de_DE">
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">zfdw-ki-leitplanken · 10 Methodentexte</p>
+  <h1>Methode</h1>
+  <p class="lead">Jeder Text beantwortet eine Frage, nennt zuerst das Problem und dann die Regel —
+  wer nur die Regel liest, kann sie nicht sinnvoll anpassen. Hier je Methode der Einstieg, der
+  Volltext liegt im Repo.</p>
+</section>
+
+<section>
+  <h2>Übersicht</h2>
+  <table class="werkbank">
+    <tbody>
+      <tr>
+        <td class="wb-name"><a href="/methode/01-sprintplan-und-write-scope">01 — Sprintplan mit Write-Scope</a></td>
+        <td class="wb-was">Wie überlebt ein Vorhaben den Kontext-Reset?<br><strong>Die Sprint-Datei ist der Zustand, nicht seine Beschreibung.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/02-schichten-anweisung-hook-skill">02 — Schichten</a></td>
+        <td class="wb-was">Wohin gehört welche Regel?<br><strong>Der Ablageort entscheidet, ob eine Regel wirkt — nicht ihre Formulierung.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/03-kontext-budget">03 — Kontext-Budget</a></td>
+        <td class="wb-was">Warum wirkt eine lange Anweisungsdatei weniger — und welche Regeln veralten mit dem Modell?<br><strong>Sie ist immer da — das macht sie wertvoll und jede Zeile teuer.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/04-deterministische-guards">04 — Deterministische Guards</a></td>
+        <td class="wb-was">Was gehört in Code statt in Text?<br><strong>99 von 100 ist bei personenbezogenen Daten keine Kategorie.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/05-verifikation-statt-behauptung">05 — Verifikation statt Behauptung</a></td>
+        <td class="wb-was">Wann ist „fertig" belegt?<br><strong>Wer gebaut hat, prüft mit denselben Annahmen.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/06-herkunft-und-weitergabe">06 — Herkunft und Weitergabe</a></td>
+        <td class="wb-was">Was aus Kundenarbeit darf frei werden?<br><strong>Die Weiche steht vor dem ersten Satz, nicht vor dem Push.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/07-verortung">07 — Verortung</a></td>
+        <td class="wb-was">Wie verhält sich das zu den SDD-Frameworks?<br><strong>Write-Scope, Guard und Nachweis sind an keinen Ablauf gebunden.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/08-spezifikationsguete">08 — Spezifikationsgüte</a></td>
+        <td class="wb-was">Woran erkennt man, ob eine Spec taugt?<br><strong>Eine Spezifikation ist ein Informationsmodell — die Gütekriterien dafür sind älter als jedes Werkzeug.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/09-systembeschreibung">09 — Systembeschreibung</a></td>
+        <td class="wb-was">Woher weiß der Assistent, was die Anwendung überhaupt ist?<br><strong>Der Nutzen dieser Ebene entsteht nicht beim Schreiben, sondern beim Gegenlesen.</strong></td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/10-fremdtext-ist-daten">10 — Fremdtext ist Daten</a></td>
+        <td class="wb-was">Was tun, wenn der Assistent Text liest, den Fremde geschrieben haben?<br><strong>Die Sicherung sitzt am Ausgang, nicht im Prompt.</strong></td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section>
+  <h2>Reihenfolge</h2>
+  <div>
+    <p>Wer alles liest: 01 → 02 → 03 → 04 → 05. Wer eine halbe Stunde hat: <strong>01 und 04.</strong> Das sind die beiden, deren Fehlen wehtut. <strong>06</strong> ist der Sonderfall: kein Thema der täglichen Arbeit, sondern eines, das genau einmal schiefgehen muss, um teuer zu werden. Vor der ersten Veröffentlichung lesen. <strong>07</strong> braucht nur, wer eines der SDD-Frameworks kennt oder einsetzt — oder wissen will, warum hier keines davon nachgebaut wird.</p>
+    <p><strong>08</strong> gehört zu 03 und 05 — es beantwortet, was dort vorausgesetzt wird: woran eine brauchbare Spezifikation zu erkennen ist. Sinnvoll erst, wenn die erste geschrieben ist. Ein Gütekriterium braucht einen Gegenstand.</p>
+    <p><strong>09</strong> gehört ebenfalls zu 03 — es beschreibt, was aus der Anweisungsdatei herausgehalten wird und wohin es stattdessen gehört. Wer an einer gewachsenen Anwendung arbeitet, liest es früh; bei einem neuen Vorhaben ohne Vorsystem und ohne Datenhaltung ist es entbehrlich.</p>
+    <p><strong>10</strong> ist Pflicht, sobald der Assistent Mails, Webseiten, fremde Dokumente oder MCP-Server liest — und spätestens dann, wenn so etwas zeitgesteuert ohne Menschen läuft.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>
