@@ -77,6 +77,17 @@
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
+        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/hooks/tests/rot-beweis.sh">rot-beweis.sh</a></td>
+        <td class="wb-was">
+          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut fünf absichtlich
+          kaputte Fassungen des Guards — lässt alles durch, blockt alles, ohne <code>jq</code>
+          still offen, <code>commit -a</code> blind, schätzt statt misst — und verlangt, dass
+          die Testsuite jede davon bemerkt. Jede Mutante ist ein Fehler, den der Guard hatte
+          oder haben könnte.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+      <tr>
         <td class="wb-name">Sprint + Write-Scope</td>
         <td class="wb-was">
           Eine Datei pro Arbeitsabschnitt, die zugleich der Zustand ist. Kein zweiter
@@ -109,6 +120,16 @@
           Die Anweisungsdatei ist zu klein für ein Datenmodell, der Code zu groß zum Lesen.
           Dazwischen liegen vier Dateien mit vier Fragen — und der Nutzen entsteht beim
           Gegenlesen, nicht beim Schreiben.
+        </td>
+        <td class="wb-lic">im Repo</td>
+      </tr>
+      <tr>
+        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/10_Fremdtext-ist-Daten.md">Methode 10 — Fremdtext ist Daten</a></td>
+        <td class="wb-was">
+          Mail, Webseite, Tool-Beschreibung, Bericht eines anderen Agenten: Material, nie
+          Auftrag. Behandelt Premise Injection, Tool Poisoning, Rug Pull und Anweisungen, die
+          sich in wiederkehrenden Aufgaben festsetzen. Die Sicherung sitzt am Ausgang, nicht
+          im Prompt.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
@@ -327,7 +348,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>15,6 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
+    Diese Seite: <strong>17,4 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
     über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
     insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>
