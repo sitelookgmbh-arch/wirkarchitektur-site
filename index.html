@@ -59,7 +59,8 @@
   <h2>In 10 Minuten</h2>
   <div>
     <p>
-      Für Teams und Einzelne, die mit Claude Code in einem echten Repo arbeiten. Der erste
+      Für Teams und Einzelne, die mit Claude Code, Codex oder einem anderen Assistenten in einem
+      echten Repo arbeiten. Der erste
       Schritt ist der Guard — der einzige Teil, dessen Fehlen echten Schaden anrichten kann. Er
       blockt, wenn ein Befehl eine geschützte Datei in die Versionsverwaltung bringen würde, auch
       dann, wenn ihr Name im Befehl gar nicht vorkommt.
@@ -78,6 +79,14 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
       <code>.claude/geschuetzte-pfade</code> auf das eigene Projekt setzen — die Vorgaben decken
       Secrets ab, nicht deine Kundendaten.</figcaption>
     </figure>
+    <p>
+      <strong>Codex:</strong> dieselben Schritte mit <code>.codex/</code> statt <code>.claude/</code> und
+      <code>codex-hooks.json.vorlage</code> als <code>.codex/hooks.json</code> — der Guard läuft dort
+      unverändert. <strong>Jeder andere Assistent:</strong> zusätzlich
+      <code>pre-commit.vorlage</code> nach <code>.git/hooks/pre-commit</code>; dann prüft derselbe
+      Guard bei jedem Commit, wer auch immer committet.
+      <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken#mit-anderen-assistenten">Zuordnung im Repo</a>.
+    </p>
     <p>
       Weiterlesen in dieser Reihenfolge:
       <a href="/methode/04-deterministische-guards">04 — Deterministische Guards</a> (warum der Guard so
@@ -105,19 +114,21 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
       <tr>
         <td class="wb-name">guard-geschuetzte-daten.sh</td>
         <td class="wb-was">
-          PreToolUse-Hook. Misst mit <code>git add --dry-run</code>, was ein Befehl
+          PreToolUse-Hook für Claude Code und Codex, als <code>--staged</code> auch git
+          pre-commit-Hook für jeden anderen Assistenten. Misst mit <code>git add --dry-run</code>, was ein Befehl
           <em>tatsächlich stagen würde</em> — statt aus dem Zustand daneben zu schließen.
           Deckt <code>git commit -am</code> mit ab, fällt ohne <code>jq</code> closed.
-          19 Testfälle, 8 bewusste Nicht-Treffer.
+          24 Testfälle, 9 bewusste Nicht-Treffer.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/hooks/tests/rot-beweis.sh">rot-beweis.sh</a></td>
         <td class="wb-was">
-          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut fünf absichtlich
+          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut sieben absichtlich
           kaputte Fassungen des Guards — lässt alles durch, blockt alles, ohne <code>jq</code>
-          still offen, <code>commit -a</code> blind, schätzt statt misst — und verlangt, dass
+          still offen, <code>commit -a</code> blind, schätzt statt misst, sieht den Index nicht,
+          übersieht die Codex-Musterdatei — und verlangt, dass
           die Testsuite jede davon bemerkt. Jede Mutante ist ein Fehler, den der Guard hatte
           oder haben könnte.
         </td>
@@ -414,7 +425,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>20,4 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
+    Diese Seite: <strong>21,2 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
     über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
     insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>
