@@ -191,7 +191,7 @@ def kopf(titel, beschreibung, pfad):
 
 <header class="top">
   <a class="wordmark" href="/">Wirk<span>architektur</span></a>
-  <span class="traeger">Werkstatt der <strong>sitelook GmbH</strong></span>
+  <span class="traeger">Werkstatt der <a href="https://sitelook.de"><strong>sitelook GmbH</strong></a></span>
   <nav>
     <a href="/">Start</a>
     <a href="/methode/">Methode</a>
