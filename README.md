@@ -82,8 +82,14 @@ curl -sI https://digitale-wirkarchitektur.de/ | grep -iE '^(HTTP|location)'     
 
 ## Lizenz
 
-Inhalte © sitelook GmbH. Der Code der Methode, auf die die Seite verweist, liegt unter
-Apache-2.0 in `sitelookgmbh-arch/zfdw-ki-leitplanken`.
+Texte und Gestaltung © sitelook GmbH, alle Rechte vorbehalten. Apache-2.0 gilt für `werkzeuge/`
+und für die Methodenauszüge unter `/methode/`, die aus `sitelookgmbh-arch/zfdw-ki-leitplanken`
+erzeugt werden. Einzelheiten: [LICENSE.md](LICENSE.md). „Wirkarchitektur“ und „sitelook“ sind
+angemeldete Wortmarken der sitelook GmbH; die Apache-Lizenz erteilt daran keine Rechte.
+
+**E-Mail-Adressen** stehen in `<!--email_off-->…<!--/email_off-->`: Cloudflares
+E-Mail-Verschleierung bräuchte sonst ein Skript, das die CSP (`default-src 'none'`) blockt — die
+Adresse wäre im Browser nicht lesbar.
 
 ## Methodenseiten (`/methode/`)
 

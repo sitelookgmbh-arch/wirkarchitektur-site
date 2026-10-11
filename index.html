@@ -284,13 +284,13 @@ Gemessen statt geschaetzt:
 Fail-closed ohne jq:
   ok    ohne jq blockt der Guard                       (Code 2)
 ...
-19 bestanden, 0 fehlgeschlagen</code></pre>
+24 bestanden, 0 fehlgeschlagen</code></pre>
     <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
   </figure>
 
   <p>
-    Drei Härtungen sind im August aus produktiver Kundenarbeit zurückgeflossen — dort waren über
-    hundert unverfolgte Dateien mit realen Daten im Arbeitsverzeichnis gelandet, keine davon von
+    Drei Härtungen sind im August aus der Praxis zurückgeflossen — in einem Arbeitsverzeichnis
+    waren über hundert unverfolgte Dateien gelandet, keine davon von
     <code>.gitignore</code> erfasst. <strong>Messen statt schätzen:</strong> <code>--dry-run</code>
     beseitigt einen Fehlalarm, der vorher garantiert kam — <code>git add -u</code> neben einer
     herumliegenden, unverfolgten <code>.env</code>. <strong><code>git commit -am</code> mit
@@ -367,7 +367,7 @@ Fail-closed ohne jq:
         Arbeit am Repo.</p>
       </div>
     </div>
-    <p class="kontaktzeile"><a href="mailto:info@sitelook.gmbh">info@sitelook.gmbh</a></p>
+    <p class="kontaktzeile"><!--email_off--><a href="mailto:info@sitelook.gmbh">info@sitelook.gmbh</a><!--/email_off--></p>
   </div>
 </section>
 
@@ -380,9 +380,8 @@ Fail-closed ohne jq:
   </p>
   <p>
     Zu den Namen: <strong>Wirkarchitektur</strong> ist die Marke, <strong>zfdw-ki-leitplanken</strong>
-    das Repo mit Methode und Werkzeugen, <strong>ZfdW</strong> — Zentrum für digitale
-    Wirkarchitektur — der Herausgebervermerk darin, und die <strong>sitelook GmbH</strong> der
-    Träger, über den alles läuft.
+    das Repo mit Methode und Werkzeugen (der Name stammt aus der Anfangszeit), und die
+    <strong>sitelook GmbH</strong> der Träger, über den alles läuft.
   </p>
   <p>
     Geschrieben wird hier aus der Praxis: Fachanwendungen und die Infrastruktur darunter —
@@ -405,7 +404,7 @@ Fail-closed ohne jq:
     Issues und Pull Requests gehen ins Repo — das ist der schnellere Weg. Für alles andere:
   </p>
   <p class="kontaktzeile">
-    <a href="mailto:info@sitelook.gmbh">info@sitelook.gmbh</a>
+    <!--email_off--><a href="mailto:info@sitelook.gmbh">info@sitelook.gmbh</a><!--/email_off-->
   </p>
 </section>
 
@@ -440,7 +439,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
     <a href="/datenschutz">Datenschutz</a>
     <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
   </nav>
-  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+  <p class="klein">Wirkarchitektur ist eine beim DPMA angemeldete Marke der sitelook GmbH, Neuss. Texte © sitelook GmbH; Methode und Werkzeuge Apache-2.0, ohne Markenrechte.</p>
 </footer>
 
 </body>
