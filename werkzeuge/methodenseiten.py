@@ -126,8 +126,13 @@ def lies_index(repo):
 def lies_methode(datei):
     zeilen = datei.read_text(encoding="utf-8").splitlines()
     titel = zeilen[0].lstrip("# ").strip()
-    kurz, i = [], 1
+    kurz, i, status = [], 1, ""
     while i < len(zeilen) and not zeilen[i].startswith("> **Kurz:**"):
+        # Statuskopf vor der Kurzfassung (z. B. „Fassung 2 — rechtliche Prüfung läuft“) wandert in
+        # die Metazeile, damit die Seite den Stand der Methode nicht verschweigt.
+        treffer = re.match(r"> \*\*(.+?)\*\*", zeilen[i])
+        if treffer and not status:
+            status = treffer.group(1).rstrip(".")
         i += 1
     while i < len(zeilen) and zeilen[i].startswith(">"):
         kurz.append(zeilen[i].lstrip("> ").strip()); i += 1
@@ -153,7 +158,7 @@ def lies_methode(datei):
                 pruefen.append(m.group(1))
     return {"titel": titel, "kurz": kurz, "abschnitte": abschnitte,
             "problem_titel": zeilen[erste][3:].strip(), "problem": " ".join(absatz),
-            "pruefen": pruefen}
+            "pruefen": pruefen, "status": status}
 
 
 def stand(repo, datei):
@@ -208,7 +213,7 @@ FUSS = """</main>
     <a href="/datenschutz">Datenschutz</a>
     <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
   </nav>
-  <p class="klein">Wirkarchitektur ist eine angemeldete Marke der sitelook GmbH, Neuss. Inhalte Apache-2.0, ohne Markenrechte.</p>
+  <p class="klein">Wirkarchitektur ist eine beim DPMA angemeldete Marke der sitelook GmbH, Neuss. Texte © sitelook GmbH; Methode und Werkzeuge Apache-2.0, ohne Markenrechte.</p>
 </footer>
 
 </body>
@@ -221,7 +226,7 @@ def methodenseite(nr, gesamt, idx, m, datei, datum, vor, nach):
     quelle = GITHUB + "methode/" + datei.name
     teile = [kopf(f"{m['titel']} — Wirkarchitektur", kuerzen(klartext(m["kurz"])), pfad)]
     teile.append(f"""<section class="hero">
-  <p class="meta">Methode {nr} von {gesamt:02d} · Stand {datum}</p>
+  <p class="meta">Methode {nr} von {gesamt:02d} · Stand {datum}{" · " + inline(m["status"]) if m["status"] else ""}</p>
   <h1>{inline(m['titel'])}</h1>
   <p class="lead">{inline(m['kurz'])}</p>
 </section>
