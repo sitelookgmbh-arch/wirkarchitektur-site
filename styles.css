@@ -216,6 +216,8 @@ footer p { max-width: 44rem; }
   letter-spacing: 0.02em;
 }
 .traeger strong { color: var(--tinte); font-weight: 600; }
+.traeger a { text-decoration: none; }
+.traeger a:hover strong { color: var(--akzent); }
 
 .werkbank {
   grid-column: 1 / -1;
