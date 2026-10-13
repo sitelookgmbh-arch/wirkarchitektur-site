@@ -16,6 +16,7 @@ methode/          Methodenseiten — ERZEUGT, nicht von Hand ändern (s. u.)
 werkzeuge/        methodenseiten.py: erzeugt methode/ + Sitemap-Block, prüft Drift
                   test_methodenseiten.py: Tests des Generators (Prüfliste)
                   herkunft-check.sh: Herkunfts-Gate vor jedem PR (s. u.)
+.github/          CI: Generator-Tests + Drift gegen zfdw-ki-leitplanken main (s. u.)
 ```
 
 ## Die Zusage der Seite
@@ -113,8 +114,13 @@ python3 werkzeuge/test_methodenseiten.py  # nach Änderungen am Generator
 `--pruefen` ist der Rot-Beweis gegen Drift: Er vergleicht jede Seite und den Sitemap-Block mit
 dem, was das Repo heute ergäbe — auch verwaiste Seiten zu gelöschten Methoden.
 
-Übernommen wird jeder Punkt unter `## Prüfen` vollständig, auch wenn er im Methodentext über
-mehrere eingerückte Zeilen umbricht. Eine verschachtelte Liste unter einem Prüfpunkt kann die Seite
+Beides läuft in CI (`.github/workflows/tests.yml`) bei jedem PR und jedem Push auf `main`, gegen
+`zfdw-ki-leitplanken` `main`. Ändert sich dort eine Methode, wird die Site-CI rot, bis die Seiten
+neu erzeugt sind — auch auf einem PR, der damit nichts zu tun hat.
+
+Die Prüfliste ist der Abschnitt, dessen Überschrift mit „Prüfen“ beginnt (`## Prüfen` oder eine
+Langform wie `## Prüfen, ob es eingehalten wurde`). Übernommen wird jeder Punkt darunter
+vollständig, auch wenn er im Methodentext über mehrere eingerückte Zeilen umbricht. Eine verschachtelte Liste unter einem Prüfpunkt kann die Seite
 nicht abbilden; dann bricht das Skript ab, statt still zu kürzen.
 
 ## Herkunfts-Gate

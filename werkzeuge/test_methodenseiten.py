@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tests fuer methodenseiten.py: Pruefliste mit mehrzeiligen Punkten.
+"""Tests fuer methodenseiten.py: Pruefliste (mehrzeilige Punkte, Form der Ueberschrift).
 
 Aufruf:  python3 werkzeuge/test_methodenseiten.py
 Nur Standardbibliothek, synthetische Methode, kein Checkout von zfdw-ki-leitplanken noetig.
@@ -20,15 +20,18 @@ KOPF = """# 99 — Beispielmethode
 
 Ein Absatz.
 
-## Prüfen
 """
 
 
-def lies(pruefen_block):
+def methode(pruefen_block, ueberschrift="## Prüfen"):
     with tempfile.TemporaryDirectory() as d:
         datei = pathlib.Path(d) / "99_Beispiel.md"
-        datei.write_text(KOPF + pruefen_block, encoding="utf-8")
-        return methodenseiten.lies_methode(datei)["pruefen"]
+        datei.write_text(KOPF + ueberschrift + "\n" + pruefen_block, encoding="utf-8")
+        return datei.name, methodenseiten.lies_methode(datei)
+
+
+def lies(pruefen_block, ueberschrift="## Prüfen"):
+    return methode(pruefen_block, ueberschrift)[1]["pruefen"]
 
 
 class Pruefliste(unittest.TestCase):
@@ -68,6 +71,28 @@ class Pruefliste(unittest.TestCase):
         punkte = lies("\n- [ ] Anfang des Punkts —\n      Ende des Punkts?\n")
         html = methodenseiten.inline(punkte[0])
         self.assertIn("Anfang des Punkts — Ende des Punkts?", html)
+
+
+
+class Ueberschrift(unittest.TestCase):
+    LANGFORM = "## Prüfen, ob es eingehalten wurde"
+    BLOCK = "\n- [ ] Erster Punkt.\n- [ ] Zweiter Punkt.\n\n## Verwandt\n\n- [ ] kein Prüfpunkt mehr\n"
+
+    def test_langform_wird_erkannt(self):
+        self.assertEqual(lies(self.BLOCK, self.LANGFORM), ["Erster Punkt.", "Zweiter Punkt."])
+
+    def test_wort_mit_praefix_ist_keine_pruefliste(self):
+        self.assertEqual(lies(self.BLOCK, "## Prüfenswerte Fälle"), [])
+
+    def test_langform_steht_als_pruefliste_nicht_in_der_abschnittsliste(self):
+        name, m = methode(self.BLOCK, self.LANGFORM)
+        _, seite = methodenseiten.methodenseite(
+            "99", 99, {"frage": "Frage?", "satz": "Satz."}, m, pathlib.Path(name),
+            "2026-01-01", None, None)
+        self.assertIn("<h2>Prüfliste</h2>", seite)
+        self.assertIn("<li>Erster Punkt.</li>", seite)
+        self.assertNotIn("#prüfen-ob-es-eingehalten-wurde", seite)
+        self.assertIn("#verwandt", seite)
 
 
 if __name__ == "__main__":
