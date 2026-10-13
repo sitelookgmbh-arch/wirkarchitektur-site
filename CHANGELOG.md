@@ -5,6 +5,9 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 
 ## [Unreleased]
 
+### Added
+- **Dependabot für GitHub Actions** (`.github/dependabot.yml`): monatlich, gebündelt in einem PR. Die SHA-Pins der CI veralten sonst still.
+
 ### Fixed
 - **Methode 01 zeigt ihre Prüfliste.** Der Generator suchte genau `## Prüfen`; Methode 01 nennt den
   Abschnitt `## Prüfen, ob es eingehalten wurde`, ihre Seite hatte deshalb keine Prüfliste. Jetzt
