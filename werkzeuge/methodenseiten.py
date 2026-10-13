@@ -28,6 +28,9 @@ BASIS = "https://wirkarchitektur.de"
 GITHUB = "https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/"
 SITEMAP_START = "  <!-- methode:start (erzeugt von werkzeuge/methodenseiten.py) -->"
 SITEMAP_ENDE = "  <!-- methode:end -->"
+# Pruefliste: „## Prüfen“ oder eine Langform wie „## Prüfen, ob es eingehalten wurde“.
+# Nicht: „## Prüfenswert“ o. Ae. — nach „Prüfen“ darf kein Wortzeichen folgen.
+PRUEFEN = re.compile(r"Prüfen(?!\w)")
 
 
 # ---------- Markdown, nur das Noetigste ----------
@@ -149,9 +152,12 @@ def lies_methode(datei):
         absatz.append(zeilen[k].strip()); k += 1
 
     pruefen = []
-    if "## Prüfen" in zeilen:
+    pruef_zeile = next((k for k, z in enumerate(zeilen)
+                        if z.startswith("## ") and PRUEFEN.match(z[3:].strip())), None)
+    pruef_titel = zeilen[pruef_zeile][3:].strip() if pruef_zeile is not None else None
+    if pruef_zeile is not None:
         offen = False  # gehoert eine eingerueckte Folgezeile zum letzten Punkt?
-        for z in zeilen[zeilen.index("## Prüfen") + 1:]:
+        for z in zeilen[pruef_zeile + 1:]:
             if z.startswith("## "):
                 break
             m = re.match(r"- \[ \] (.+)", z)
@@ -169,7 +175,7 @@ def lies_methode(datei):
                 offen = False
     return {"titel": titel, "kurz": kurz, "abschnitte": abschnitte,
             "problem_titel": zeilen[erste][3:].strip(), "problem": " ".join(absatz),
-            "pruefen": pruefen, "status": status}
+            "pruefen": pruefen, "pruef_titel": pruef_titel, "status": status}
 
 
 def stand(repo, datei):
@@ -268,7 +274,7 @@ def methodenseite(nr, gesamt, idx, m, datei, datum, vor, nach):
 </section>
 """)
     abschnitte = "\n".join(
-        f'      <li><a href="{quelle}#{slug_github(a)}">{inline(a)}</a></li>' for a in m["abschnitte"] if a != "Prüfen")
+        f'      <li><a href="{quelle}#{slug_github(a)}">{inline(a)}</a></li>' for a in m["abschnitte"] if a != m["pruef_titel"])
     navi = []
     if vor:
         navi.append(f'<a href="/methode/{seiten_slug(vor)}">← vorherige Methode</a>')

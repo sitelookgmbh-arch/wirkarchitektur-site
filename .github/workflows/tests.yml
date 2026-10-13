@@ -1,0 +1,62 @@
+# Generator-Tests und Drift-Pruefung der Methodenseiten.
+#
+# --pruefen vergleicht methode/ und den Sitemap-Block mit dem, was der heutige
+# Stand von zfdw-ki-leitplanken (main, oeffentlich) ergaebe. Rot heisst: Seite
+# neu erzeugen (werkzeuge/methodenseiten.py), Diff lesen, committen — auch wenn
+# der Anlass eine Aenderung im Methoden-Repo war und nicht dieser PR.
+#
+# Volle Historie des Methoden-Repos (fetch-depth: 0): Das Stand-Datum jeder
+# Seite kommt aus git log; ein flacher Checkout ergaebe falsche Daten und damit
+# Drift, die keine ist.
+#
+# Bewusst NICHT hier: das Herkunfts-Gate (werkzeuge/herkunft-check.sh). Es
+# braucht die private Begriffsliste; ohne sie bricht es mit Exit 2 ab (keine
+# Aussage). Die Liste gehoert weder ins Repo noch in Secrets oder Logs — jeder
+# Treffer gaebe die gefundene Zeile aus. Das Gate bleibt ein lokaler Schritt.
+#
+# Actions per Commit-SHA gepinnt, Token nur lesend.
+
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  methodenseiten:
+    name: Generator-Tests und Drift gegen leitplanken main
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Site auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: wirkarchitektur-site
+          persist-credentials: false
+
+      - name: Methoden-Repo auschecken (main, volle Historie)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: sitelookgmbh-arch/zfdw-ki-leitplanken
+          ref: main
+          path: zfdw-ki-leitplanken
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Stand des Methoden-Repos
+        run: |
+          python3 --version
+          git -C zfdw-ki-leitplanken log -1 --format='zfdw-ki-leitplanken main @ %h (%cs)'
+
+      - name: Generator-Tests
+        working-directory: wirkarchitektur-site
+        run: python3 werkzeuge/test_methodenseiten.py
+
+      - name: Drift-Pruefung (methodenseiten.py --pruefen)
+        working-directory: wirkarchitektur-site
+        run: python3 werkzeuge/methodenseiten.py --pruefen ../zfdw-ki-leitplanken
