@@ -150,12 +150,23 @@ def lies_methode(datei):
 
     pruefen = []
     if "## Prüfen" in zeilen:
+        offen = False  # gehoert eine eingerueckte Folgezeile zum letzten Punkt?
         for z in zeilen[zeilen.index("## Prüfen") + 1:]:
             if z.startswith("## "):
                 break
             m = re.match(r"- \[ \] (.+)", z)
             if m:
-                pruefen.append(m.group(1))
+                pruefen.append(m.group(1).strip())
+                offen = True
+            elif offen and z[:1] in (" ", "\t") and z.strip():
+                # Fortsetzungszeile eines mehrzeiligen Punkts. Eine eingerueckte Liste
+                # darunter kann die Seite nicht abbilden: lieber abbrechen als still kuerzen.
+                if re.match(r"\s+([-*+]|\d+[.)])\s", z):
+                    sys.exit(f"Abbruch: {datei.name}, ## Prüfen: verschachtelte Liste unter "
+                             f"einem Prüfpunkt wird nicht unterstützt: {z.strip()!r}")
+                pruefen[-1] += " " + z.strip()
+            else:
+                offen = False
     return {"titel": titel, "kurz": kurz, "abschnitte": abschnitte,
             "problem_titel": zeilen[erste][3:].strip(), "problem": " ".join(absatz),
             "pruefen": pruefen, "status": status}

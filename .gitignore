@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+
+# Enthaelt Kunden-, System- und Personennamen — gehoert NIE in ein
+# oeffentliches Repo. Lokal als Link: ln -s ../zfdw-ki-leitplanken/.herkunft-begriffe .herkunft-begriffe
+.herkunft-begriffe
