@@ -14,6 +14,8 @@ _redirects        .com und Langform -> wirkarchitektur.de
 robots.txt · sitemap.xml
 methode/          Methodenseiten — ERZEUGT, nicht von Hand ändern (s. u.)
 werkzeuge/        methodenseiten.py: erzeugt methode/ + Sitemap-Block, prüft Drift
+                  test_methodenseiten.py: Tests des Generators (Prüfliste)
+                  herkunft-check.sh: Herkunfts-Gate vor jedem PR (s. u.)
 ```
 
 ## Die Zusage der Seite
@@ -105,7 +107,28 @@ schreibt statisches HTML, das wie jede andere Datei committet wird.
 ```bash
 werkzeuge/methodenseiten.py             # nach Änderungen im Methoden-Repo: neu erzeugen, Diff lesen
 werkzeuge/methodenseiten.py --pruefen   # Exit 1, wenn eine Seite nicht mehr zum Repo passt
+python3 werkzeuge/test_methodenseiten.py  # nach Änderungen am Generator
 ```
 
 `--pruefen` ist der Rot-Beweis gegen Drift: Er vergleicht jede Seite und den Sitemap-Block mit
 dem, was das Repo heute ergäbe — auch verwaiste Seiten zu gelöschten Methoden.
+
+Übernommen wird jeder Punkt unter `## Prüfen` vollständig, auch wenn er im Methodentext über
+mehrere eingerückte Zeilen umbricht. Eine verschachtelte Liste unter einem Prüfpunkt kann die Seite
+nicht abbilden; dann bricht das Skript ab, statt still zu kürzen.
+
+## Herkunfts-Gate
+
+Die Site ist öffentlich und zitiert Methodentexte. Vor jedem PR:
+
+```bash
+ln -s ../zfdw-ki-leitplanken/.herkunft-begriffe .herkunft-begriffe   # einmalig
+werkzeuge/herkunft-check.sh                                            # 0 = kein Treffer
+```
+
+Das Skript ruft das Gate aus `zfdw-ki-leitplanken` auf, mit **derselben** Begriffsliste. Es gibt
+also nur eine Liste und nur eine Logik. Fehlt `.herkunft-begriffe` oder ist sie leer, bricht es mit
+Exit 2 ab: Ein Lauf ohne Begriffe dieses Projekts wäre grün, aber ohne Aussage. Die Datei enthält
+Kunden-, System- und Personennamen. Sie steht in `.gitignore`, und das Skript verweigert den Lauf,
+wenn sie versioniert ist. Ein leeres Ergebnis ist die untere Schranke, keine Freigabe: Die Belege
+liest trotzdem ein Mensch.
