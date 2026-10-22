@@ -6,9 +6,32 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 ## [Unreleased]
 
 ### Added
+- **Zahlen-Check** (`werkzeuge/zahlen-check.sh`): führt Guard-Suite und Rot-Beweis aus
+  `zfdw-ki-leitplanken` aus und vergleicht Testfälle, Nicht-Treffer, Mutanten sowie die
+  ausgelieferte Größe von HTML und CSS mit `index.html`. Läuft in CI als eigener Job.
+  `werkzeuge/test_zahlen-check.sh` ist sein Rot-Beweis: 7 Verfälschungen, alle erkannt.
+- `og:image` (1200 × 630, `/og-wirkarchitektur.png`, eigenes Motiv aus dem Favicon) auf Startseite
+  und Methodenseiten; `favicon.ico` für Browser, die sie trotz Data-URI anfragen.
+- Impressum und Datenschutz: `description` und `canonical`.
 - **Dependabot für GitHub Actions** (`.github/dependabot.yml`): monatlich, gebündelt in einem PR. Die SHA-Pins der CI veralten sonst still.
 
+### Changed
+- `styles.css` wird mit `?v=<Datum>` eingebunden und ein Jahr `immutable` gecacht (bisher 4 h).
+  Bei jeder Änderung an `styles.css` das Datum in allen HTML-Dateien und im Generator mitziehen.
+- Sitemap: Startseite `lastmod` 2026-10-22; Impressum und Datenschutz entfernt, weil beide `noindex`
+  tragen.
+- Quelltext-Kommentar der Startseite im Du, wie die Seite.
+
 ### Fixed
+- **Zahlen der Startseite auf einen echten Lauf gezogen** (`zfdw-ki-leitplanken` `main` `e0c7f26`,
+  22.10.2026): 48 statt 24 Testfälle, 16 statt 9 bewusste Nicht-Treffer, 11 statt 7 Mutanten
+  (Aufzählung ergänzt), Beispielausgabe „48 bestanden“. Kolophon: 21,3 kB HTML und 7,4 kB CSS,
+  gemessen wie ausgeliefert; `Permissions-Policy` wortgleich mit `/_headers`.
+- **Navigation auf dem Handy:** bricht um statt über den Rand zu laufen (bei 375 px war sie 553 px
+  breit). Schrift 0,9 rem statt 0,82 rem.
+- Verweise auf Methode 07–10 zeigen auf die eigenen Methodenseiten statt auf `.md` bei GitHub.
+- **Betonung kursiv statt Monospace:** `em` sah aus wie Code ohne Hintergrund.
+
 - **Methode 01 zeigt ihre Prüfliste.** Der Generator suchte genau `## Prüfen`; Methode 01 nennt den
   Abschnitt `## Prüfen, ob es eingehalten wurde`, ihre Seite hatte deshalb keine Prüfliste. Jetzt
   zählt jede Überschrift, die mit dem Wort „Prüfen“ beginnt (nicht „Prüfenswert…“). Die

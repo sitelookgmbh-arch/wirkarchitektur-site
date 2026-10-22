@@ -5,3 +5,9 @@
   Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Cross-Origin-Opener-Policy: same-origin
+
+# styles.css wird im HTML mit ?v=<Datum> eingebunden (von Hand, kein Build):
+# bei jeder Änderung an styles.css das Datum in allen HTML-Dateien und im
+# Generator (werkzeuge/methodenseiten.py) mitziehen.
+/styles.css
+  Cache-Control: public, max-age=31536000, immutable
