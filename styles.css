@@ -63,7 +63,7 @@ body {
 }
 .wordmark span { color: var(--gedaempft); }
 
-.top nav { display: flex; gap: 1.4rem; font-family: var(--mono); font-size: 0.82rem; }
+.top nav { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; font-family: var(--mono); font-size: 0.9rem; }
 .top nav a { color: var(--gedaempft); text-decoration: none; }
 .top nav a:hover { color: var(--akzent); }
 
@@ -121,7 +121,7 @@ h3 { font-size: 1.06rem; margin: 0 0 0.5rem; }
 a { color: var(--akzent); text-underline-offset: 3px; }
 
 strong { font-weight: 600; }
-em { font-style: normal; font-family: var(--mono); font-size: 0.9em; }
+em { font-style: italic; font-family: inherit; font-size: inherit; }
 
 /* ---------- Tabelle ---------- */
 

@@ -60,3 +60,35 @@ jobs:
       - name: Drift-Pruefung (methodenseiten.py --pruefen)
         working-directory: wirkarchitektur-site
         run: python3 werkzeuge/methodenseiten.py --pruefen ../zfdw-ki-leitplanken
+
+  zahlen:
+    name: Zahlen der Startseite gegen echten Lauf
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Site auschecken
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          path: wirkarchitektur-site
+          persist-credentials: false
+
+      - name: Methoden-Repo auschecken (main)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: sitelookgmbh-arch/zfdw-ki-leitplanken
+          ref: main
+          path: zfdw-ki-leitplanken
+          persist-credentials: false
+
+      - name: Stand des Methoden-Repos
+        run: git -C zfdw-ki-leitplanken log -1 --format='zfdw-ki-leitplanken main @ %h (%cs)'
+
+      # Fuehrt Guard-Suite und Rot-Beweis aus und vergleicht ihre Zahlen sowie die
+      # Groesse von HTML und CSS mit index.html. Rot heisst: Seite nachziehen.
+      - name: Zahlen-Check (zahlen-check.sh)
+        working-directory: wirkarchitektur-site
+        run: werkzeuge/zahlen-check.sh ../zfdw-ki-leitplanken
+
+      - name: Rot-Beweis des Zahlen-Checks
+        working-directory: wirkarchitektur-site
+        run: werkzeuge/test_zahlen-check.sh

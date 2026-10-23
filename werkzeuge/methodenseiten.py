@@ -201,7 +201,11 @@ def kopf(titel, beschreibung, pfad):
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{b}">
 <meta property="og:locale" content="de_DE">
-<link rel="stylesheet" href="/styles.css">
+<meta property="og:image" content="https://wirkarchitektur.de/og-wirkarchitektur.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/styles.css?v=2026-10-22">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
 </head>
 <body>

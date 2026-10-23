@@ -14,6 +14,7 @@ _redirects        .com und Langform -> wirkarchitektur.de
 robots.txt · sitemap.xml
 methode/          Methodenseiten — ERZEUGT, nicht von Hand ändern (s. u.)
 werkzeuge/        methodenseiten.py: erzeugt methode/ + Sitemap-Block, prüft Drift
+                  zahlen-check.sh: Zahlen der Startseite gegen echten Lauf (s. u.)
                   test_methodenseiten.py: Tests des Generators (Prüfliste)
                   herkunft-check.sh: Herkunfts-Gate vor jedem PR (s. u.)
 .github/          CI: Generator-Tests + Drift gegen zfdw-ki-leitplanken main (s. u.)
@@ -138,3 +139,16 @@ Exit 2 ab: Ein Lauf ohne Begriffe dieses Projekts wäre grün, aber ohne Aussage
 Kunden-, System- und Personennamen. Sie steht in `.gitignore`, und das Skript verweigert den Lauf,
 wenn sie versioniert ist. Ein leeres Ergebnis ist die untere Schranke, keine Freigabe: Die Belege
 liest trotzdem ein Mensch.
+
+## Zahlen der Startseite
+
+Testfälle, Nicht-Treffer und Mutanten auf `index.html` stammen aus `zfdw-ki-leitplanken`, die
+Größen im Kolophon aus den ausgelieferten Dateien. `werkzeuge/zahlen-check.sh` führt Guard-Suite und
+Rot-Beweis aus und vergleicht alles mit der Seite (Exit 1 bei Abweichung); in CI als Job `zahlen`,
+zusammen mit seinem Rot-Beweis `werkzeuge/test_zahlen-check.sh`. Gemessen wird wie ausgeliefert:
+ohne die `email_off`-Marker, die Cloudflare entfernt, in Dezimal-kB mit einer Nachkommastelle.
+
+Wer HTML oder CSS ändert, lässt den Check danach laufen und zieht das Kolophon nach. Wer
+`styles.css` ändert, setzt außerdem das Datum in `styles.css?v=…` in allen HTML-Dateien und in
+`werkzeuge/methodenseiten.py` neu (ein Jahr `immutable` im Cache, siehe `_headers`).
+

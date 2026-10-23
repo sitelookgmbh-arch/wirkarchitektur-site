@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="de">
 <!--
-  Sie lesen den Quelltext. Dann wissen Sie schon, worauf Sie achten.
+  Du liest den Quelltext. Dann weißt du schon, worauf du achtest.
 
   Kein JavaScript. Keine externe Schriftart. Kein fremder Host. Kein Cookie.
   Die CSP in /_headers erzwingt es: default-src 'none'.
@@ -21,7 +21,11 @@
 <meta property="og:title" content="Wirkarchitektur — Werkstatt der sitelook GmbH">
 <meta property="og:description" content="Werkzeuge und Methode für die Arbeit mit KI-Assistenten in echten Repos. Guards, die die Wirkung prüfen statt den Wortlaut. Apache-2.0, öffentlich, nachbaubar.">
 <meta property="og:locale" content="de_DE">
-<link rel="stylesheet" href="/styles.css">
+<meta property="og:image" content="https://wirkarchitektur.de/og-wirkarchitektur.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/styles.css?v=2026-10-22">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
 </head>
 <body>
@@ -118,17 +122,19 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
           pre-commit-Hook für jeden anderen Assistenten. Misst mit <code>git add --dry-run</code>, was ein Befehl
           <em>tatsächlich stagen würde</em> — statt aus dem Zustand daneben zu schließen.
           Deckt <code>git commit -am</code> mit ab, fällt ohne <code>jq</code> closed.
-          24 Testfälle, 9 bewusste Nicht-Treffer.
+          48 Testfälle, davon 16 bewusste Nicht-Treffer.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/hooks/tests/rot-beweis.sh">rot-beweis.sh</a></td>
         <td class="wb-was">
-          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut sieben absichtlich
+          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut 11 absichtlich
           kaputte Fassungen des Guards — lässt alles durch, blockt alles, ohne <code>jq</code>
           still offen, <code>commit -a</code> blind, schätzt statt misst, sieht den Index nicht,
-          übersieht die Codex-Musterdatei — und verlangt, dass
+          übersieht die Codex-Musterdatei, misst ein gezieltes <code>git add</code> mit <code>-A</code>,
+          lässt einen unlesbaren Befehl durch, erkennt <code>git -C &lt;pfad&gt; add</code> nicht,
+          misst die Pfade eines <code>commit</code> nicht — und verlangt, dass
           die Testsuite jede davon bemerkt. Jede Mutante ist ein Fehler, den der Guard hatte
           oder haben könnte.
         </td>
@@ -143,7 +149,7 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
-        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md">Methode 07 — Verortung</a></td>
+        <td class="wb-name"><a href="/methode/07-verortung">Methode 07 — Verortung</a></td>
         <td class="wb-was">
           Einordnung gegen SpecKit, BMAD, OpenSpec, GSD Core und Kiro — samt der Frage,
           wann eines der fünf die bessere Wahl ist. Angaben aus den Original-Repositorien,
@@ -152,7 +158,7 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
-        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/08_Spezifikationsguete.md">Methode 08 — Spezifikationsgüte</a></td>
+        <td class="wb-name"><a href="/methode/08-spezifikationsguete">Methode 08 — Spezifikationsgüte</a></td>
         <td class="wb-was">
           Werkzeuge sagen, <em>wie</em> eine Spec auszusehen hat. Keines sagt, <em>ob sie gut
           ist</em>. Sechs Gütekriterien aus den Grundsätzen ordnungsmäßiger
@@ -162,7 +168,7 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
-        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/09_Systembeschreibung.md">Methode 09 — Systembeschreibung</a></td>
+        <td class="wb-name"><a href="/methode/09-systembeschreibung">Methode 09 — Systembeschreibung</a></td>
         <td class="wb-was">
           Die Anweisungsdatei ist zu klein für ein Datenmodell, der Code zu groß zum Lesen.
           Dazwischen liegen vier Dateien mit vier Fragen — und der Nutzen entsteht beim
@@ -171,7 +177,7 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
-        <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/10_Fremdtext-ist-Daten.md">Methode 10 — Fremdtext ist Daten</a></td>
+        <td class="wb-name"><a href="/methode/10-fremdtext-ist-daten">Methode 10 — Fremdtext ist Daten</a></td>
         <td class="wb-was">
           Mail, Webseite, Tool-Beschreibung, Bericht eines anderen Agenten: Material, nie
           Auftrag. Behandelt Premise Injection, Tool Poisoning, Rug Pull und Anweisungen, die
@@ -224,7 +230,7 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
   </p>
 
   <p class="callout">
-    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/07_Verortung.md">Methode 07 — Verortung</a>
+    <a href="/methode/07-verortung">Methode 07 — Verortung</a>
     zieht den Vergleich im Einzelnen, mit Lesedatum im Kopf, weil diese Seite schneller driftet als
     der Rest. Zwei verbreitete Angaben stimmen dort nicht mehr: Das ursprüngliche GSD-Repository ist
     <strong>archiviert</strong> und lebt als GSD Core weiter, und SpecKit ist mit dem
@@ -284,7 +290,7 @@ Gemessen statt geschaetzt:
 Fail-closed ohne jq:
   ok    ohne jq blockt der Guard                       (Code 2)
 ...
-24 bestanden, 0 fehlgeschlagen</code></pre>
+48 bestanden, 0 fehlgeschlagen</code></pre>
     <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
   </figure>
 
@@ -420,11 +426,12 @@ Fail-closed ohne jq:
   img-src 'self' data:; form-action 'none'; base-uri 'none';
   frame-ancestors 'none'
 Referrer-Policy: no-referrer
-Permissions-Policy: camera=(), microphone=(), geolocation=()</code></pre>
+Permissions-Policy: camera=(), microphone=(), geolocation=(),
+  interest-cohort=()</code></pre>
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>21,2 kB</strong> HTML, <strong>7,3 kB</strong> CSS — unkomprimiert;
+    Diese Seite: <strong>21,3 kB</strong> HTML, <strong>7,4 kB</strong> CSS — unkomprimiert;
     über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
     insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>
