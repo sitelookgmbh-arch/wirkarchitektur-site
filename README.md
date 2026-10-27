@@ -48,7 +48,6 @@ Offen bleibt:
 |---|---|---|
 | Kontaktadresse | `index.html`, Impressum | derzeit `info@sitelook.gmbh`. Eine Adresse `…@wirkarchitektur.de` braucht MX-Einträge |
 | Hoster-Entität | `datenschutz.html` | beim Anlegen des Cloudflare-Kontos genaue Vertragsentität und AVV-Link gegenprüfen |
-| Strato-Vertrag | — | prüfen, ob die Domains auf der GmbH oder privat laufen (Bestellbestätigung lautete auf die Geschäftsführerin) |
 
 ## Deploy (Cloudflare Pages)
 

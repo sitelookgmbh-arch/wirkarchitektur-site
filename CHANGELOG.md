@@ -16,6 +16,15 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 - **Dependabot für GitHub Actions** (`.github/dependabot.yml`): monatlich, gebündelt in einem PR. Die SHA-Pins der CI veralten sonst still.
 
 ### Changed
+- CI prüft die Navigation mit Chromium bei 375 und 1440 px auf horizontalen Überlauf,
+  außerdem Sprungziel, Mail-Anfrage, Kontaktlinks und Unterseiten-Fußzeilen.
+- **T10:** Startnavigation auf Einstieg, Werkbank, Methode, Guard, Mit sitelook und Kontakt
+  reduziert; Einordnung und Warum offen bleiben als Abschnitte erhalten. Früher Hinweis
+  auf Einrichtung, Review und Schulung mit Sprung zu Mit sitelook; dort direkte Mail-Anfrage
+  mit Betreff. Kontakt verweist auf öffentliche Issues und Pull Requests.
+- Unterseiten einschließlich 404: Fußzeile um Mit sitelook und Kontakt ergänzt;
+  Methodenseiten aus dem Generator erneuert. Impressum und Datenschutz erhalten `og:image`.
+  Prüfpunkt zum Strato-Vertrag aus dem README entfernt.
 - `styles.css` wird mit `?v=<Datum>` eingebunden und ein Jahr `immutable` gecacht (bisher 4 h).
   Bei jeder Änderung an `styles.css` das Datum in allen HTML-Dateien und im Generator mitziehen.
 - Sitemap: Startseite `lastmod` 2026-10-22; Impressum und Datenschutz entfernt, weil beide `noindex`

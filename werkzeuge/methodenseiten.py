@@ -228,6 +228,8 @@ FUSS = """</main>
 
 <footer>
   <nav class="fusszeile">
+    <a href="/#mit-sitelook">Mit sitelook</a>
+    <a href="/#kontakt">Kontakt</a>
     <a href="/">Start</a>
     <a href="/methode/">Methode</a>
     <a href="/impressum">Impressum</a>
