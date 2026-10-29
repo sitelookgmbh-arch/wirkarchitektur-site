@@ -6,6 +6,7 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 ## [Unreleased]
 
 ### Added
+- **Methode 11 — Nahtstellen-Register** als Seite (`methode/11-nahtstellen-register.html`), erzeugt aus zfdw-ki-leitplanken; Zählung auf Start- und Methodenseiten auf elf.
 - **Zahlen-Check** (`werkzeuge/zahlen-check.sh`): führt Guard-Suite und Rot-Beweis aus
   `zfdw-ki-leitplanken` aus und vergleicht Testfälle, Nicht-Treffer, Mutanten sowie die
   ausgelieferte Größe von HTML und CSS mit `index.html`. Läuft in CI als eigener Job.
@@ -32,6 +33,7 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 - Quelltext-Kommentar der Startseite im Du, wie die Seite.
 
 ### Fixed
+- **Datenschutzseite:** interner Bearbeitungsvermerk aus dem HTML-Quelltext entfernt; der sichtbare Text bleibt unverändert.
 - **Zahlen der Startseite auf einen echten Lauf gezogen** (`zfdw-ki-leitplanken` `main` `e0c7f26`,
   22.10.2026): 48 statt 24 Testfälle, 16 statt 9 bewusste Nicht-Treffer, 11 statt 7 Mutanten
   (Aufzählung ergänzt), Beispielausgabe „48 bestanden“. Kolophon: 21,3 kB HTML und 7,4 kB CSS,

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 — Nahtstellen-Register — Wirkarchitektur</title>
+<meta name="description" content="Ein Review sieht den eigenen Diff. Die teuren Fehler entstehen aber dort, wo zwei Dinge aufeinandertreffen, die einzeln korrekt sind. Was an einer …">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/11-nahtstellen-register">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/11-nahtstellen-register">
+<meta property="og:title" content="11 — Nahtstellen-Register — Wirkarchitektur">
+<meta property="og:description" content="Ein Review sieht den eigenen Diff. Die teuren Fehler entstehen aber dort, wo zwei Dinge aufeinandertreffen, die einzeln korrekt sind. Was an einer …">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://wirkarchitektur.de/og-wirkarchitektur.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/styles.css?v=2026-10-22">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <a href="https://sitelook.de"><strong>sitelook GmbH</strong></a></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">Methode 11 von 11 · Stand 2026-10-29</p>
+  <h1>11 — Nahtstellen-Register</h1>
+  <p class="lead">Ein Review sieht den eigenen Diff. Die teuren Fehler entstehen aber dort, wo zwei Dinge aufeinandertreffen, die einzeln korrekt sind. Was an einer Nahtstelle schon einmal schiefging, gehört in ein Register, das jedes Review vor der Freigabe lesen muss.</p>
+</section>
+
+<section>
+  <h2>Die Frage</h2>
+  <div>
+    <p>Wie verhindert man, dass derselbe Fehler zwischen zwei Werkzeugen zweimal passiert?</p>
+    <p class="callout">Ein Review sieht den eigenen Diff, die teuren Fehler liegen dazwischen.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Das Problem</h2>
+  <p>Je mehr Arbeit Assistenten und Automatik übernehmen, desto mehr Übergaben gibt es: von einem Lauf zum nächsten, von einem Werkzeug zum anderen, vom gemergten Stand zum laufenden. Jede Seite für sich ist geprüft. Der Fehler liegt dazwischen, und dort schaut kein Review hin, weil es keinen Diff dafür gibt.</p>
+</section>
+
+<section>
+  <h2>Prüfliste</h2>
+  <ul>
+    <li>Gibt es eine Stelle, an der Nahtstellen-Fehler festgehalten werden, außerhalb von Köpfen und Chatverläufen?</li>
+    <li>Liest das Review diese Stelle, und ist das mit einer Probeänderung belegt?</li>
+    <li>Hat jeder Eintrag ein Gegenmittel oder ein ausdrückliches „fehlt“?</li>
+    <li>Wird nach einer Übernahme geprüft, ob der laufende Prozess den neuen Stand wirklich ausführt?</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Im Volltext</h2>
+  <div>
+    <p>Diese Seite ist der Einstieg. Begründungen, Beispiele und Grenzen stehen im Volltext —
+    eine Regel steht an genau einer Stelle, und das ist das Repo.</p>
+    <ul>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/11_Nahtstellen-Register.md#das-problem">Das Problem</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/11_Nahtstellen-Register.md#die-regel">Die Regel</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/11_Nahtstellen-Register.md#grenzen">Grenzen</a></li>
+    </ul>
+    <p class="callout"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/11_Nahtstellen-Register.md">Volltext lesen: methode/11_Nahtstellen-Register.md</a><br>
+    Stand 2026-10-29 · Apache-2.0 · Fehler oder Gegenbeispiel bitte als Issue im Repo.</p>
+    <p class="klein"><a href="/methode/10-fremdtext-ist-daten">← vorherige Methode</a> · <a href="/methode/">Übersicht</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/#mit-sitelook">Mit sitelook</a>
+    <a href="/#kontakt">Kontakt</a>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine beim DPMA angemeldete Marke der sitelook GmbH, Neuss. Texte © sitelook GmbH; Methode und Werkzeuge Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>
