@@ -17,6 +17,8 @@ Versionsnummern; was vor diesem Eintrag geschah, steht in `git log`.
 - **Dependabot für GitHub Actions** (`.github/dependabot.yml`): monatlich, gebündelt in einem PR. Die SHA-Pins der CI veralten sonst still.
 
 ### Changed
+- Methodenseiten 05–08 und Sitemap aus dem Methodenstand vom 29.10.2026 (`ffb337c`)
+  neu erzeugt; Startseite und Mutantenbeschreibung auf den aktuellen Guard-Testlauf gezogen.
 - CI prüft die Navigation mit Chromium bei 375 und 1440 px auf horizontalen Überlauf,
   außerdem Sprungziel, Mail-Anfrage, Kontaktlinks und Unterseiten-Fußzeilen.
 - **T10:** Startnavigation auf Einstieg, Werkbank, Methode, Guard, Mit sitelook und Kontakt
