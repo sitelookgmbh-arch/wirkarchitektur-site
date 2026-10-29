@@ -71,6 +71,32 @@ class CollectorTests(unittest.TestCase):
         self.commit()
         self.assertNotEqual(self.run_collector('1.0.0').returncode, 0)
 
+    def assert_rejection_without_changes(self, message):
+        before = {str(f.relative_to(self.root)): f.read_bytes()
+                  for f in self.root.rglob('*')
+                  if f.is_file() and '.git' not in f.relative_to(self.root).parts}
+        for args in (('1.0.0',), ('1.0.0', '--dry-run')):
+            result = self.run_collector(*args)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn(message, result.stderr)
+            after = {str(f.relative_to(self.root)): f.read_bytes()
+                     for f in self.root.rglob('*')
+                     if f.is_file() and '.git' not in f.relative_to(self.root).parts}
+            self.assertEqual(before, after)
+            self.assertEqual(self.git('status', '--porcelain').stdout, '')
+
+    def test_existing_version_without_archive(self):
+        (self.root / 'CHANGELOG.md').write_text(
+            ORIGINAL.replace('## [0.1.0]', '## [1.0.0]'))
+        self.commit()
+        self.assertFalse((self.root / 'changelog.d/archive').exists())
+        self.assert_rejection_without_changes('Version bereits vorhanden')
+
+    def test_invalid_fragment_name(self):
+        self.fragment('Foo_Bar', 'Added\n- Neu.\n')
+        self.commit()
+        self.assert_rejection_without_changes('Ungültiger Fragmentname')
+
     def test_first_collection(self):
         unreleased = ORIGINAL.split('## [0.1.0]')[0].rstrip() + '\n'
         (self.root / 'CHANGELOG.md').write_text(unreleased)
@@ -167,6 +193,10 @@ class CollectorTests(unittest.TestCase):
         original = self.script.read_text()
         base = self.git('rev-parse', 'HEAD').stdout.strip()
         mutations = {
+            'Vorhandene Version akzeptiert': (
+                '! grep -Fq "## [$version]" CHANGELOG.md', 'true'),
+            'Ungültiger Fragmentname akzeptiert': (
+                '[[ "${file##*/}" =~ ^[a-z0-9][a-z0-9-]*\\.md$ ]]', 'true'),
             'Erste Sammlung fehlt': ('END {if (!done) {print ""; insert()}}', 'END {}'),
             'Lockere Listen': (
                 '''awk 'NR > 1 && NF {print}' "$file" >> "$tmp/$section"''',
@@ -182,7 +212,13 @@ class CollectorTests(unittest.TestCase):
                 self.assertEqual(original.count(old), 1)
                 self.script.write_text(original.replace(old, new))
                 self.commit()
-                if name == 'Schmutziger Baum akzeptiert':
+                if name == 'Vorhandene Version akzeptiert':
+                    with self.assertRaises(AssertionError):
+                        self.test_existing_version_without_archive()
+                elif name == 'Ungültiger Fragmentname akzeptiert':
+                    with self.assertRaises(AssertionError):
+                        self.test_invalid_fragment_name()
+                elif name == 'Schmutziger Baum akzeptiert':
                     (self.root / 'CHANGELOG.md').write_text(ORIGINAL + 'changed\n')
                     with self.assertRaises(AssertionError):
                         self.assertNotEqual(self.run_collector('1.0.0').returncode, 0)
