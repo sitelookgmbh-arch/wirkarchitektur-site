@@ -124,14 +124,14 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
           pre-commit-Hook für jeden anderen Assistenten. Misst mit <code>git add --dry-run</code>, was ein Befehl
           <em>tatsächlich stagen würde</em> — statt aus dem Zustand daneben zu schließen.
           Deckt <code>git commit -am</code> mit ab, fällt ohne <code>jq</code> closed.
-          57 Testfälle, davon 19 bewusste Nicht-Treffer.
+          69 Testfälle, davon 19 bewusste Nicht-Treffer.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/hooks/tests/rot-beweis.sh">rot-beweis.sh</a></td>
         <td class="wb-was">
-          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut 14 absichtlich
+          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut 16 absichtlich
           kaputte Fassungen des Guards — lässt alles durch, blockt alles, ohne <code>jq</code>
           still offen, <code>commit -a</code> blind, schätzt statt misst, sieht den Index nicht,
           übersieht die Codex-Musterdatei, misst ein gezieltes <code>git add</code> mit <code>-A</code>,
@@ -294,7 +294,7 @@ Gemessen statt geschaetzt:
 Fail-closed ohne jq:
   ok    ohne jq blockt der Guard                       (Code 2)
 ...
-57 bestanden, 0 fehlgeschlagen</code></pre>
+69 bestanden, 0 fehlgeschlagen</code></pre>
     <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
   </figure>
 
