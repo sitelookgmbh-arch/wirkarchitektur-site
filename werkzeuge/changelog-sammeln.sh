@@ -40,8 +40,8 @@ for file in "${files[@]}"; do
   awk 'NR == 1 {next} /^- .+/ {entries++; next} /^$/ {next}
        /^  +[^ ]/ {if (entries) next} {exit 1}
        END {if (!entries) exit 1}' "$file" || fail "Ungültiger Inhalt: $file"
-  tail -n +2 "$file" >> "$tmp/$section"
-  printf '\n' >> "$tmp/$section"
+  # Enge Listen und genau ein Schlussumbruch, auch bei Fragmenten ohne LF.
+  awk 'NR > 1 && NF {print}' "$file" >> "$tmp/$section"
 done
 {
   printf '## [%s] - %s\n' "$version" "$(date +%F)"

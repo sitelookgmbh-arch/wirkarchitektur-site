@@ -71,6 +71,30 @@ class CollectorTests(unittest.TestCase):
         self.commit()
         self.assertNotEqual(self.run_collector('1.0.0').returncode, 0)
 
+    def test_first_collection(self):
+        unreleased = ORIGINAL.split('## [0.1.0]')[0].rstrip() + '\n'
+        (self.root / 'CHANGELOG.md').write_text(unreleased)
+        self.commit()
+        result = self.run_collector('1.0.0')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        text = (self.root / 'CHANGELOG.md').read_text()
+        self.assertTrue(text.startswith(unreleased + '\n## [1.0.0] - '))
+        self.assertIn('### Added\n- Neu.\n', text)
+        self.assertIn('### Fixed\n- Korrektur.\n  Fortsetzung.\n', text)
+        for name in ('a', 'b'):
+            self.assertFalse((self.root / f'changelog.d/{name}.md').exists())
+            self.assertTrue((self.root / f'changelog.d/archive/1.0.0/{name}.md').is_file())
+
+    def test_tight_lists(self):
+        self.fragment('aa', 'Added\n\n- Zweiter Punkt.\n\n')
+        self.fragment('ab', 'Added\n- Ohne Schlussumbruch.')
+        self.commit()
+        result = self.run_collector('1.0.0')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        text = (self.root / 'CHANGELOG.md').read_text()
+        self.assertIn('### Added\n- Neu.\n- Zweiter Punkt.\n- Ohne Schlussumbruch.\n\n### Fixed', text)
+        self.assertIn('  Fortsetzung.\n\n## [0.1.0]', text)
+
     def test_rejections_do_not_write(self):
         for args in ((), ('../bad',), ('--unknown',), ('1.0.0', '2.0.0')):
             with self.subTest(args=args):
@@ -85,9 +109,18 @@ class CollectorTests(unittest.TestCase):
     def test_dirty_tree(self):
         for path in ('untracked', 'CHANGELOG.md'):
             p = self.root / path
-            p.write_text('changed\n')
+            p.write_text((ORIGINAL if path == 'CHANGELOG.md' else '') + 'changed\n')
+            before = {str(f.relative_to(self.root)): f.read_bytes()
+                      for f in self.root.rglob('*')
+                      if f.is_file() and '.git' not in f.relative_to(self.root).parts}
             for args in (('1.0.0',), ('1.0.0', '--dry-run')):
-                self.assertNotEqual(self.run_collector(*args).returncode, 0)
+                result = self.run_collector(*args)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('Arbeitsbaum nicht sauber', result.stderr)
+                after = {str(f.relative_to(self.root)): f.read_bytes()
+                         for f in self.root.rglob('*')
+                         if f.is_file() and '.git' not in f.relative_to(self.root).parts}
+                self.assertEqual(before, after)
             if path == 'untracked':
                 p.unlink()
 
@@ -132,22 +165,33 @@ class CollectorTests(unittest.TestCase):
 
     def test_mutations_detected(self):
         original = self.script.read_text()
+        base = self.git('rev-parse', 'HEAD').stdout.strip()
         mutations = {
+            'Erste Sammlung fehlt': ('END {if (!done) {print ""; insert()}}', 'END {}'),
+            'Lockere Listen': (
+                '''awk 'NR > 1 && NF {print}' "$file" >> "$tmp/$section"''',
+                '''tail -n +2 "$file" >> "$tmp/$section"; printf '\\n' >> "$tmp/$section"'''),
             'Fragment fehlt': ('cat "$tmp/$section"', ':'),
             'Falscher Abschnitt': ("printf '\\n### %s\\n' \"$section\"", "printf '\\n### Wrong\\n'"),
             'Schmutziger Baum akzeptiert': ('[ -z "$(git status --porcelain --untracked-files=all)" ]', 'true'),
         }
         for name, (old, new) in mutations.items():
             with self.subTest(mutation=name):
-                self.git('reset', '--hard', 'HEAD')
+                self.git('reset', '--hard', base)
                 self.git('clean', '-fd')
                 self.assertEqual(original.count(old), 1)
                 self.script.write_text(original.replace(old, new))
                 self.commit()
                 if name == 'Schmutziger Baum akzeptiert':
-                    (self.root / 'untracked').write_text('dirty')
+                    (self.root / 'CHANGELOG.md').write_text(ORIGINAL + 'changed\n')
                     with self.assertRaises(AssertionError):
                         self.assertNotEqual(self.run_collector('1.0.0').returncode, 0)
+                elif name == 'Erste Sammlung fehlt':
+                    with self.assertRaises(AssertionError):
+                        self.test_first_collection()
+                elif name == 'Lockere Listen':
+                    with self.assertRaises(AssertionError):
+                        self.test_tight_lists()
                 else:
                     preview = self.run_collector("1.0.0", "--dry-run")
                     self.assertEqual(preview.returncode, 0, preview.stderr)
