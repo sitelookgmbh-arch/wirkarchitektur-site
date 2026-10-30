@@ -111,9 +111,9 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">zfdw-ki-leitplanken</a></td>
         <td class="wb-was">
-          Zehn Methodentexte, vier Vorlagen, vier Slash-Commands, zwei Hooks mit Testsuite und Rot-Beweis,
+          Elf Methodentexte, vier Vorlagen, vier Slash-Commands, zwei Hooks mit Testsuite und Rot-Beweis,
           ein Herkunfts-Gate. Keine Laufzeit, keine Dependencies, kein Installer.
-          <a href="/methode/">Alle zehn Methoden im Überblick</a>.
+          <a href="/methode/">Alle elf Methoden im Überblick</a>.
         </td>
         <td class="wb-lic">Apache-2.0</td>
       </tr>
@@ -124,19 +124,21 @@ cp $L/hooks/geschuetzte-pfade.vorlage .claude/geschuetzte-pfade</code></pre>
           pre-commit-Hook für jeden anderen Assistenten. Misst mit <code>git add --dry-run</code>, was ein Befehl
           <em>tatsächlich stagen würde</em> — statt aus dem Zustand daneben zu schließen.
           Deckt <code>git commit -am</code> mit ab, fällt ohne <code>jq</code> closed.
-          48 Testfälle, davon 16 bewusste Nicht-Treffer.
+          72 Testfälle, davon 19 bewusste Nicht-Treffer.
         </td>
         <td class="wb-lic">im Repo</td>
       </tr>
       <tr>
         <td class="wb-name"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/hooks/tests/rot-beweis.sh">rot-beweis.sh</a></td>
         <td class="wb-was">
-          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut 11 absichtlich
+          Grün beweist nur etwas, wenn Rot möglich ist. Das Skript baut 17 absichtlich
           kaputte Fassungen des Guards — lässt alles durch, blockt alles, ohne <code>jq</code>
           still offen, <code>commit -a</code> blind, schätzt statt misst, sieht den Index nicht,
           übersieht die Codex-Musterdatei, misst ein gezieltes <code>git add</code> mit <code>-A</code>,
           lässt einen unlesbaren Befehl durch, erkennt <code>git -C &lt;pfad&gt; add</code> nicht,
-          misst die Pfade eines <code>commit</code> nicht — und verlangt, dass
+          misst die Pfade eines <code>commit</code> nicht, misst <code>git -C</code> im falschen
+          Verzeichnis, löst relative Pfade gegen das Hook-Verzeichnis auf, ignoriert weitere
+          <code>-C</code>-Optionen — und verlangt, dass
           die Testsuite jede davon bemerkt. Jede Mutante ist ein Fehler, den der Guard hatte
           oder haben könnte.
         </td>
@@ -292,7 +294,7 @@ Gemessen statt geschaetzt:
 Fail-closed ohne jq:
   ok    ohne jq blockt der Guard                       (Code 2)
 ...
-48 bestanden, 0 fehlgeschlagen</code></pre>
+72 bestanden, 0 fehlgeschlagen</code></pre>
     <figcaption>Die Nicht-Treffer sind der wichtigere Teil. Ein Guard mit Fehlalarmen wird umgangen — danach schützt er nichts.</figcaption>
   </figure>
 
@@ -434,7 +436,7 @@ Permissions-Policy: camera=(), microphone=(), geolocation=(),
     <figcaption>Aus <code>/_headers</code>. <code>default-src 'none'</code> heißt: Was nicht ausdrücklich erlaubt ist, wird nicht geladen.</figcaption>
   </figure>
   <p class="messwerte">
-    Diese Seite: <strong>21,6 kB</strong> HTML, <strong>7,4 kB</strong> CSS — unkomprimiert;
+    Diese Seite: <strong>21,8 kB</strong> HTML, <strong>7,4 kB</strong> CSS — unkomprimiert;
     über die Leitung geht brotli-komprimiert etwa die Hälfte. <strong>2 Anfragen</strong>
     insgesamt. Kein Skript, kein Cookie, kein Banner.
   </p>

@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Methode — Wirkarchitektur</title>
-<meta name="description" content="10 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
+<meta name="description" content="11 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
 <link rel="canonical" href="https://wirkarchitektur.de/methode/">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://wirkarchitektur.de/methode/">
 <meta property="og:title" content="Methode — Wirkarchitektur">
-<meta property="og:description" content="10 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
+<meta property="og:description" content="11 Methodentexte für Repos, in denen ein KI-Assistent mitschreibt: Sprint und Write-Scope, Guards, Verifikation, Herkunft, Fremdtext. Apache-2.0.">
 <meta property="og:locale" content="de_DE">
 <meta property="og:image" content="https://wirkarchitektur.de/og-wirkarchitektur.png">
 <meta property="og:image:width" content="1200">
@@ -33,7 +33,7 @@
 
 <main>
 <section class="hero">
-  <p class="meta">zfdw-ki-leitplanken · 10 Methodentexte</p>
+  <p class="meta">zfdw-ki-leitplanken · 11 Methodentexte</p>
   <h1>Methode</h1>
   <p class="lead">Jeder Text beantwortet eine Frage, nennt zuerst das Problem und dann die Regel —
   wer nur die Regel liest, kann sie nicht sinnvoll anpassen. Hier je Methode der Einstieg, der
@@ -84,6 +84,10 @@
         <td class="wb-name"><a href="/methode/10-fremdtext-ist-daten">10 — Fremdtext ist Daten</a></td>
         <td class="wb-was">Was tun, wenn der Assistent Text liest, den Fremde geschrieben haben?<br><strong>Die Sicherung sitzt am Ausgang, nicht im Prompt.</strong></td>
       </tr>
+      <tr>
+        <td class="wb-name"><a href="/methode/11-nahtstellen-register">11 — Nahtstellen-Register</a></td>
+        <td class="wb-was">Wie verhindert man, dass derselbe Fehler zwischen zwei Werkzeugen zweimal passiert?<br><strong>Ein Review sieht den eigenen Diff, die teuren Fehler liegen dazwischen.</strong></td>
+      </tr>
     </tbody>
   </table>
 </section>
@@ -95,6 +99,7 @@
     <p><strong>08</strong> gehört zu 03 und 05 — es beantwortet, was dort vorausgesetzt wird: woran eine brauchbare Spezifikation zu erkennen ist. Sinnvoll erst, wenn die erste geschrieben ist. Ein Gütekriterium braucht einen Gegenstand.</p>
     <p><strong>09</strong> gehört ebenfalls zu 03 — es beschreibt, was aus der Anweisungsdatei herausgehalten wird und wohin es stattdessen gehört. Wer an einer gewachsenen Anwendung arbeitet, liest es früh; bei einem neuen Vorhaben ohne Vorsystem und ohne Datenhaltung ist es entbehrlich.</p>
     <p><strong>10</strong> ist Pflicht, sobald der Assistent Mails, Webseiten, fremde Dokumente oder MCP-Server liest — und spätestens dann, wenn so etwas zeitgesteuert ohne Menschen läuft.</p>
+    <p><strong>11</strong> gehört zu 05: Verifikation prüft eine Änderung, das Register erinnert an das, was zwischen Änderungen schiefging. Lohnt sich, sobald mehr als ein Werkzeug oder ein automatischer Lauf am selben Stand arbeitet.</p>
   </div>
 </section>
 </main>
