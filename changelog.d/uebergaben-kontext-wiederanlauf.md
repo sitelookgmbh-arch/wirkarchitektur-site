@@ -1,2 +1,2 @@
 Changed
-- **Methodeneinstiege 03 und 11:** Prüflisten und Volltextverweise aus der ergänzten Methodensammlung neu erzeugt; Sitemap nachgeführt.
+- **Methodeneinstiege 01 bis 12:** Lernschleife ergänzt, Gesamtzahl und Übersicht aktualisiert sowie Prüflisten und Volltextverweise zu Kontext-Budget und Nahtstellen nachgeführt. Alle Seiten und die Sitemap aus der aktuellen Methodensammlung neu erzeugt.

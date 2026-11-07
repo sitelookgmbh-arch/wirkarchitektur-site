@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="de">
+<!-- Erzeugt von werkzeuge/methodenseiten.py aus zfdw-ki-leitplanken. Nicht von Hand aendern. -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 — Lernschleife: Fehler werden Prüfregeln — Wirkarchitektur</title>
+<meta name="description" content="Ein dokumentierter Fehler ist noch kein verhinderter Fehler. Aus belegten Vorfällen werden Vorschläge für technische Prüfungen. Assistenten dürfen diese …">
+<link rel="canonical" href="https://wirkarchitektur.de/methode/12-lernschleife">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://wirkarchitektur.de/methode/12-lernschleife">
+<meta property="og:title" content="12 — Lernschleife: Fehler werden Prüfregeln — Wirkarchitektur">
+<meta property="og:description" content="Ein dokumentierter Fehler ist noch kein verhinderter Fehler. Aus belegten Vorfällen werden Vorschläge für technische Prüfungen. Assistenten dürfen diese …">
+<meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://wirkarchitektur.de/og-wirkarchitektur.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/styles.css?v=2026-10-22">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23111'/><path d='M20 25v50M50 25v50M80 25v50M20 50h60' stroke='%23e8623a' stroke-width='9' fill='none'/></svg>">
+</head>
+<body>
+
+<header class="top">
+  <a class="wordmark" href="/">Wirk<span>architektur</span></a>
+  <span class="traeger">Werkstatt der <a href="https://sitelook.de"><strong>sitelook GmbH</strong></a></span>
+  <nav>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero">
+  <p class="meta">Methode 12 von 12 · Stand 2026-11-07</p>
+  <h1>12 — Lernschleife: Fehler werden Prüfregeln</h1>
+  <p class="lead">Ein dokumentierter Fehler ist noch kein verhinderter Fehler. Aus belegten Vorfällen werden Vorschläge für technische Prüfungen. Assistenten dürfen diese vorschlagen; in Kraft setzt sie ein Mensch über den normalen Änderungsweg.</p>
+</section>
+
+<section>
+  <h2>Die Frage</h2>
+  <div>
+    <p>Wie werden belegte Fehler zu wirksamen Prüfregeln?</p>
+    <p class="callout">Ein dokumentierter Fehler ist noch kein verhinderter Fehler.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Das Problem</h2>
+  <p>Eine falsche Erfolgsmeldung wird korrigiert und als Notiz festgehalten. Beim nächsten Umbau tritt sie wieder auf: Die Notiz war vorhanden, aber nichts hat das falsche Ergebnis verhindert. Mehr Anweisungstext allein schließt diese Lücke nicht.</p>
+</section>
+
+<section>
+  <h2>Prüfliste</h2>
+  <ul>
+    <li>Hat jeder erfasste Fehler einen Beleg und jeder Eintrag eine stabile ID?</li>
+    <li>Werden Vorschläge geprüft und doppelte Belege beim Zählen ausgeschlossen?</li>
+    <li>Nennt jeder Eintrag genau ein technisches Gegenmittel mit Fundstelle oder ausdrücklich „ohne Gegenmittel, begründet“?</li>
+    <li>Ist für „abgesichert“ der fehlerhafte Fall tatsächlich abgewiesen und ein zulässiger Fall erfolgreich geprüft worden?</li>
+    <li>Öffnet ein erneuter Vorfall den Eintrag wieder, einschließlich Beleg und Wiederholungszahl?</li>
+    <li>Werden Änderungen an Regeln, Hooks und Guards erst nach menschlicher Freigabe wirksam?</li>
+    <li>Wie groß ist der Anteil der Einträge mit vorhandenem technischem Gegenmittel an allen bestätigten Einträgen? Zähler, Nenner und Stichtag nennen; bei leerer Liste ist der Anteil nicht bestimmbar. Begründete Ausnahmen im Nenner lassen und gesondert ausweisen.</li>
+    <li>Wie entwickeln sich die Wiederholungen je Eintrag in vergleichbaren Zeiträumen, besonders seit Aktivierung des Gegenmittels? Ausführungshäufigkeit und Erfassungslücken mitbetrachten: Weniger Betrieb kann ebenfalls weniger Vorfälle bedeuten.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Im Volltext</h2>
+  <div>
+    <p>Diese Seite ist der Einstieg. Begründungen, Beispiele und Grenzen stehen im Volltext —
+    eine Regel steht an genau einer Stelle, und das ist das Repo.</p>
+    <ul>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/12_Lernschleife.md#das-problem">Das Problem</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/12_Lernschleife.md#die-regel">Die Regel</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/12_Lernschleife.md#synthetisches-beispiel">Synthetisches Beispiel</a></li>
+      <li><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/12_Lernschleife.md#grenzen">Grenzen</a></li>
+    </ul>
+    <p class="callout"><a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken/blob/main/methode/12_Lernschleife.md">Volltext lesen: methode/12_Lernschleife.md</a><br>
+    Stand 2026-11-07 · Apache-2.0 · Fehler oder Gegenbeispiel bitte als Issue im Repo.</p>
+    <p class="klein"><a href="/methode/11-nahtstellen-register">← vorherige Methode</a> · <a href="/methode/">Übersicht</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <nav class="fusszeile">
+    <a href="/#mit-sitelook">Mit sitelook</a>
+    <a href="/#kontakt">Kontakt</a>
+    <a href="/">Start</a>
+    <a href="/methode/">Methode</a>
+    <a href="/impressum">Impressum</a>
+    <a href="/datenschutz">Datenschutz</a>
+    <a href="https://github.com/sitelookgmbh-arch/zfdw-ki-leitplanken">Repo</a>
+  </nav>
+  <p class="klein">Wirkarchitektur ist eine beim DPMA angemeldete Marke der sitelook GmbH, Neuss. Texte © sitelook GmbH; Methode und Werkzeuge Apache-2.0, ohne Markenrechte.</p>
+</footer>
+
+</body>
+</html>
