@@ -5,6 +5,7 @@ Aufruf:  python3 werkzeuge/test_methodenseiten.py
 Nur Standardbibliothek, synthetische Methode, kein Checkout von zfdw-ki-leitplanken noetig.
 """
 import pathlib
+import re
 import sys
 import tempfile
 import unittest
@@ -32,6 +33,22 @@ def methode(pruefen_block, ueberschrift="## Prüfen"):
 
 def lies(pruefen_block, ueberschrift="## Prüfen"):
     return methode(pruefen_block, ueberschrift)[1]["pruefen"]
+
+
+class Methodenzahl(unittest.TestCase):
+    def test_startseite_entspricht_erzeugten_methodenseiten(self):
+        site = pathlib.Path(__file__).resolve().parent.parent
+        anzahl = len(list((site / "methode").glob("[0-9][0-9]-*.html")))
+        self.assertGreater(anzahl, 0)
+        woerter = "null eins zwei drei vier fünf sechs sieben acht neun zehn elf zwölf".split()
+        text = (site / "index.html").read_text(encoding="utf-8")
+        for muster in (r"(\w+) Methodentexte", r"Alle (\w+) Methoden im Überblick"):
+            with self.subTest(muster=muster):
+                treffer = re.findall(muster, text)
+                self.assertEqual(len(treffer), 1)
+                wort = treffer[0].lower()
+                zahl = int(wort) if wort.isdecimal() else woerter.index(wort)
+                self.assertEqual(zahl, anzahl)
 
 
 class Pruefliste(unittest.TestCase):
